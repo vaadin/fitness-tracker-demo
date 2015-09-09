@@ -1,0 +1,263 @@
+<dom-module id="workouts-view">
+    <template>
+        <style>
+            vaadin-grid {
+                color: #00bfa5;
+                font-weight: 500;
+                height: 100%;
+            }
+            vaadin-grid /deep/ thead {
+                box-shadow: none;
+            }
+            vaadin-grid /deep/ tr td {
+                border-bottom: none !important;
+            }
+            vaadin-grid /deep/ tr:hover td {
+                background: #d6eaea !important;
+            }
+            vaadin-grid /deep/ tr.vaadin-grid-row td {
+                background: #eff8f8;
+            }
+            vaadin-grid /deep/ tr.vaadin-grid-row-stripe td {
+                background: #fff;
+            }
+            vaadin-grid /deep/ th {
+                color: #004d40;
+            }
+            vaadin-grid /deep/ th.last-frozen,
+            vaadin-grid /deep/ td.last-frozen {
+                border: none !important;
+            }
+            vaadin-grid /deep/ .toggle-details {
+                cursor: pointer;
+            }
+            vaadin-grid /deep/ .vaadin-grid-row:after {
+                background: transparent;
+            }
+
+            vaadin-grid /deep/ .workout-details {
+                width: 100vw;
+                padding: 16px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                background: transparent;
+                color: var(--text-primary-color);
+            }
+            vaadin-grid /deep/ .workout-details .map-and-weather {
+                display: flex;
+                flex-direction: row;
+            }
+            vaadin-grid /deep/ .workout-details .map-and-weather > div {
+                flex: 1;
+            }
+            vaadin-grid /deep/ .workout-details .map-and-weather .map {
+                background: url(https://dl.dropboxusercontent.com/u/2502415/vaadin/google-maps-placeholder.png) top left no-repeat;
+                background-size: cover;
+                height: 200px;
+                flex: 2;
+            }
+            vaadin-grid /deep/ .workout-details .map-and-weather .weather {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            vaadin-grid /deep/ .workout-details .row {
+                display: flex;
+            }
+            vaadin-grid /deep/ .workout-details .cell {
+                padding: 20px 0 0 10px;
+                flex: 1;
+            }
+            vaadin-grid /deep/ .workout-details .cell strong {
+                font-weight: 100;
+                display: block;
+            }
+            vaadin-grid /deep/ .workout-details iron-icon {
+                float: left;
+                margin-right: 8px;
+            }
+        </style>
+        <paper-toolbar>
+            <h1>Workouts</h1>
+        </paper-toolbar>
+
+        <vaadin-grid frozen-columns="1" selection-mode="disabled" id="workoutGrid">
+            <table>
+                <colgroup>
+                    <col width="20" />
+                    <col name="date" header-text="DATE" sortable />
+                    <col name="distance" header-text="DISTANCE" sortable />
+                    <col name="duration" header-text="TIME" sortable />
+                </colgroup>
+            </table>
+        </vaadin-grid>
+
+        <div style="display: none" id="templateWrapper">
+            <template is="dom-bind" id="workoutDetails">
+                <div class="workout-details">
+                    <div class="map-and-weather">
+                        <div class="map"></div>
+                        <div class="weather">
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>{{workout.temperature}}</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>{{workout.humidity}}</span>%</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Sun.png"></iron-icon><strong>Weather</strong>{{workout.weather}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><strong>Calories</strong><span>{{workout.calories}}</span> kcal</div>
+                        <div class="cell"><strong>Avg pace</strong><span>{{formatDuration(workout.avgPace)}}</span> min/km</div>
+                        <div class="cell"><strong>Max pace</strong><span>{{formatDuration(workout.maxPace)}}</span> min/km</div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><strong>Min altitude</strong><span>{{workout.minAlt}}</span> m</div>
+                        <div class="cell"><strong>Max altitude</strong><span>{{workout.maxAlt}}</span> m</div>
+                        <div class="cell"><strong>Ascent/descent</strong><span>{{formatAscent(workout.ascent)}}</span> m</div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'workouts-view',
+
+            properties: {
+                workouts: {
+                    type: Array,
+                    value: [
+                        {
+                            "date": "2015-09-08T08:25:43.511Z",
+                            "distance": 1505,
+                            "duration": 5743,
+                            "weather": "Dry",
+                            "humidity": 5,
+                            "temperature": 19,
+                            "calories": 1616,
+                            "avgPace": 397,
+                            "maxPace": 280,
+                            "minAlt": 113,
+                            "maxAlt": 132,
+                            "ascent": 19
+                        },
+                        {
+                            "date": "2015-09-05T18:25:43.511Z",
+                            "distance": 1005,
+                            "duration": 3043,
+                            "weather": "Dry",
+                            "humidity": 5,
+                            "temperature": 22,
+                            "calories": 1516,
+                            "avgPace": 397,
+                            "maxPace": 280,
+                            "minAlt": 103,
+                            "maxAlt": 122,
+                            "ascent": 19
+                        },
+                        {
+                            "date": "2015-09-03T18:25:43.511Z",
+                            "distance": 500,
+                            "duration": 62,
+                            "weather": "Dry",
+                            "humidity": 5,
+                            "temperature": 16,
+                            "calories": 1516,
+                            "avgPace": 397,
+                            "maxPace": 280,
+                            "minAlt": 103,
+                            "maxAlt": 122,
+                            "ascent": -19
+                        }
+                    ]
+                }
+            },
+
+            ready: function() {
+                var template = this.$.workoutDetails;
+                template.formatDuration = this._formatDuration;
+                template.formatAscent = function(ascent) {
+                    return (ascent > 0 ? '+' + ascent : ascent);
+                }
+
+                var visibleRowDetails = [];
+                var grid = this.$.workoutGrid;
+                var self = this;
+                var renderers = {
+                    date: function(cell) {
+                        cell.element.innerText = moment(cell.data).fromNow().toUpperCase();
+                    },
+                    distance: function(cell) {
+                        if (cell.data >= 1000) {
+                            cell.element.innerText = (cell.data / 1000).toFixed(2) + ' km';
+                        } else {
+                            cell.element.innerText = cell.data + ' m';
+                        }
+                    },
+                    duration: function(cell) {
+                        cell.element.innerText = self._formatDuration(cell.data, true);
+                    },
+                    toggle: function(cell) {
+                        var toggle = document.createElement('div');
+                        toggle.classList.add('toggle-details');
+                        var rowIndex = cell.row.index;
+                        toggle.addEventListener('click', function(e) {
+                            if (visibleRowDetails.indexOf(rowIndex) === -1) {
+                                visibleRowDetails.push(rowIndex);
+                                grid.setRowDetailsVisible(rowIndex, true);
+                            } else {
+                                visibleRowDetails.splice(visibleRowDetails.indexOf(rowIndex), 1);
+                                grid.setRowDetailsVisible(rowIndex, false);
+                            }
+                        });
+                        toggle.innerHTML = (visibleRowDetails.indexOf(rowIndex) === -1 ? '&#9654;' : '&#9660;');
+                        if (cell.element.firstChild) {
+                            cell.element.removeChild(cell.element.firstChild);
+                        }
+                        cell.element.appendChild(toggle);
+                    }
+                }
+                grid.columns[0].renderer = renderers.toggle;
+                grid.columns[1].renderer = renderers.date;
+                grid.columns[2].renderer = renderers.distance;
+                grid.columns[3].renderer = renderers.duration;
+                grid.data.source = this.workouts;
+
+                grid.rowDetailsGenerator = function(rowIndex) {
+                    console.log(rowIndex);
+                    var details = document.createElement('div');
+                    details.classList.add('workout-details');
+                    grid.data.getItem(rowIndex, function(err, item) {
+                        if (!err) {
+                            var detailsTemplate = self.$.workoutDetails;
+                            detailsTemplate.workout = item;
+                            console.log(detailsTemplate);
+                            details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
+                        }
+                    });
+                    return details;
+                };
+            },
+
+            _getWorkoutDetailsHtml: function(workout) {
+                var detailsTemplate = document.getElementById('workout-details');
+                detailsTemplate.workout = workout;
+                return this.$.templateWrapper.querySelector('.workout-details').innerHTML;
+            },
+
+            _formatDuration: function(seconds, displayHours) {
+                if (arguments.length === 1) {
+                    displayHours = false;
+                }
+                var duration = moment.duration(seconds, 'seconds')
+                var format = '';
+                if (displayHours) {
+                    format += duration.hours() + ':';
+                }
+                format += (duration.minutes() < 10 ? '0' + duration.minutes() : duration.minutes());
+                format += ':' + (duration.seconds() < 10 ? '0' + duration.seconds() : duration.seconds());
+                return format;
+            }
+        });
+    </script>
+</dom-module>
