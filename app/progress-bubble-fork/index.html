@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple test page for progress-bubble element</title>
+        <script src="../webcomponentsjs/webcomponents.min.js"></script>
+        <script>
+            // window.Polymer = window.Polymer || {};
+            // window.Polymer.dom = 'shadow';
+        </script>
+        <link rel="import" href="progress-bubble.html" />
+
+        <style type="text/css">
+            progress-bubble {
+                position: absolute;
+                top: 100px;
+                margin-left: 100px;
+                width: 300px;
+                height: 300px;
+                color: #004d3f;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            progress-bubble:nth-child(2) {
+                width: 228px;
+                height: 228px;
+                top: 136px;
+                left: 44px;
+            }
+            body {
+                background: #fff;
+                font-family: "Open Sans", Helvetica, sans-serif;
+            }
+        </style>
+        <style is="custom-style">
+            progress-bubble {
+                text-shadow: none;
+                --progress-bubble-stroke-color: #06c2a5;
+                --progress-bubble-bg-stroke-color: #eff8f8;
+                --progress-bubble-background: transparent;
+                --progress-bubble-reflection-display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <progress-bubble stroke-width="35" max="100" value="25">25%</progress-bubble>
+        <progress-bubble stroke-width="35" max="100" value="38">38%</progress-bubble>
+        <!--<progress-bubble stroke-width="4" max="100" value="25"></progress-bubble>
+        <progress-bubble stroke-width="6" max="100" value="25"></progress-bubble>
+        <progress-bubble stroke-width="8" max="100" value="25"></progress-bubble>
+        <progress-bubble stroke-width="10" max="100" value="25"></progress-bubble>
+        <progress-bubble stroke-width="12" max="100" value="25"></progress-bubble>-->
+
+        <script type="text/javascript">
+            NodeList.prototype.forEach = Array.prototype.forEach;  // Haxor.
+            //
+            // document.querySelectorAll("progress-bubble").forEach(function(e, i) {
+            //     e.style.left = (i * 180) + "px";
+            //     e.style.width = (50 + i * 15) + "px";
+            //     e.style.height = e.style.width;
+            //     e.style.fontSize = (i + 4) * 3 + "px";
+            // });
+            //
+            var x = 0;
+            window.setInterval(function() {
+                document.querySelectorAll("progress-bubble").forEach(function(e) {
+                    e.value = e.value + Math.ceil(Math.random() * 5);
+                    if (e.value > 100) {
+                        e.value = 0;
+                    }
+
+                    // The textContent must be changed with Polymer DOM API.
+                    Polymer.dom(e).textContent = e.value + '%';
+                });
+            }, 500);
+        </script>
+
+    </body>
+</html>
