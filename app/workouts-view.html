@@ -164,7 +164,7 @@
                     <div class="map-and-weather">
                         <div class="map"></div>
                         <div class="weather">
-                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>{{workout.temperature}}</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>{{formatTemperature(workout.temperature)}}</div>
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>{{workout.humidity}}</span>%</div>
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/Sun.png"></iron-icon><strong>Weather</strong>{{workout.weather}}</div>
                         </div>
@@ -243,6 +243,9 @@
                 template.formatDuration = this._formatDuration;
                 template.formatAscent = function(ascent) {
                     return (ascent > 0 ? '+' + ascent : ascent);
+                }
+                template.formatTemperature = function(temperature) {
+                    return (temperature > 0 ? '+' + temperature : temperature) + ' C';
                 }
 
                 var visibleRowDetails = [];
