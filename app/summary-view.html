@@ -1,0 +1,60 @@
+<link rel="import" href="app-theme.html" />
+<dom-module id="summary-view">
+    <template>
+        <style include="app-theme"></style>
+        <style>
+            .progress-circles {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin: 20px auto;
+            }
+            progress-bubble {
+                text-shadow: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                color: #004d3f;
+                font-weight: bold;
+                font-size: 14px;
+                --progress-bubble-stroke-color: #06c2a5;
+                --progress-bubble-bg-stroke-color: #eff8f8;
+                --progress-bubble-background: transparent;
+                --progress-bubble-reflection-display: none;
+            }
+            progress-bubble:nth-child(2) {
+                width: calc(100% - 70px);
+                height: calc(100% - 70px);
+                top: 50%;
+                left: 50%;
+                margin-top: calc((100% - 70px) / -2);
+                margin-left: calc((100% - 70px) / -2);
+            }
+            progress-bubble:nth-child(3) {
+                width: calc(100% - 2 * 70px);
+                height: calc(100% - 2 * 70px);
+                top: 50%;
+                left: 50%;
+                margin-top: calc((100% - 2 * 70px) / -2);
+                margin-left: calc((100% - 2 * 70px) / -2);
+            }
+        </style>
+        <paper-toolbar>
+            <h1>Workouts Summary</h1>
+        </paper-toolbar>
+        <div class="progress-circles">
+            <progress-bubble stroke-width="35" max="100" value="25">25%</progress-bubble>
+            <progress-bubble stroke-width="35" max="100" value="38">38%</progress-bubble>
+            <progress-bubble stroke-width="35" max="100" value="78">78%</progress-bubble>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'summary-view'
+        });
+    </script>
+</dom-module>
