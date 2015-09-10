@@ -135,9 +135,7 @@
             var angle = 2 * Math.PI * (this.value / this.max) - Math.PI / 2 - 0.15;
             var x = Math.cos(angle) * this._radius;
             var y = Math.sin(angle) * this._radius;
-            // TODO figure out coordinates for label
             this.$.content.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
-            console.log(angle, x, y);
         },
         redraw: function() {
             this._cx = this.clientWidth / 2;

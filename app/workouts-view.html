@@ -308,14 +308,12 @@
                 grid.data.source = this.workouts;
 
                 grid.rowDetailsGenerator = function(rowIndex) {
-                    console.log(rowIndex);
                     var details = document.createElement('div');
                     details.classList.add('workout-details');
                     grid.data.getItem(rowIndex, function(err, item) {
                         if (!err) {
                             var detailsTemplate = self.$.workoutDetails;
                             detailsTemplate.workout = item;
-                            console.log(detailsTemplate);
                             details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
                         }
                     });
