@@ -1,6 +1,7 @@
 <dom-module id="speed-altitude-chart">
     <template>
         <v-chart id="vchart" type="areaspline">
+            <vc-chart background-color="transparent"></vc-chart>
             <vc-title>
                 <vc-style display="none"></vc-style>
             </vc-title>
@@ -29,7 +30,7 @@
             </vc-y-axis>
             <vc-y-axis opposite="true" id="alt">
                 <vc-title>
-                    <vc-text>m</vc-text>
+                    <vc-text>meters</vc-text>
                     <vc-style color="#004d40"></vc-style>
                 </vc-title>
                 <vc-labels>
