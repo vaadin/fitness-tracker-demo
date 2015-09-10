@@ -147,6 +147,14 @@
             <h1>Workouts</h1>
         </paper-toolbar>
 
+        <div style="height: 250px; margin-top: 20px">
+            <speed-altitude-chart
+                speed-data="[8, 9, 8, 8, 10, 11, 12]"
+                altitude-data="[100, 103, 104, 113, 103, 92, 81]"
+                labels='["0 km", "2 km", "4 km", "6 km", "8 km", "10 km", "12 km"]'>
+            </speed-altitude-chart>
+        </div>
+
         <vaadin-grid frozen-columns="1" selection-mode="disabled" id="workoutGrid">
             <table>
                 <colgroup>
