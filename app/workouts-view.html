@@ -71,8 +71,6 @@
                 flex: 1;
             }
             vaadin-grid ::content .workout-details .map-and-weather .map {
-                background: url(https://dl.dropboxusercontent.com/u/2502415/vaadin/google-maps-placeholder.png) top left no-repeat;
-                background-size: cover;
                 height: 200px;
                 -webkit-box-flex: 2;
                 -webkit-flex: 2;
@@ -164,7 +162,9 @@
             <template is="dom-bind" id="workoutDetails">
                 <div class="workout-details">
                     <div class="map-and-weather">
-                        <div class="map"></div>
+                        <div class="map">
+                            <google-map id="routeMap"></google-map>
+                        </div>
                         <div class="weather">
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>{{formatTemperature(workout.temperature)}}</div>
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>{{workout.humidity}}</span>%</div>
@@ -316,6 +316,11 @@
                             var detailsTemplate = self.$.workoutDetails;
                             detailsTemplate.workout = item;
                             details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
+
+                            details.addEventListener('google-map-ready', function() {
+                                // Test data – Teemu's Ruisrääkki from 2014.
+                                this.querySelector('#routeMap').kml = 'https://dl.dropboxusercontent.com/u/2502415/vaadin/fitness/activity_594778529.kml';
+                            });
                         }
                     });
                     return details;

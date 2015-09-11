@@ -6,6 +6,7 @@
   ],
   "private": true,
   "dependencies": {
+    "google-map": "~1.1.0",
     "iron-flex-layout": "polymerelements/iron-flex-layout#~1.0.3",
     "iron-icon": "polymerelements/iron-icon#~1.0.4",
     "moment": "~2.10.6",
