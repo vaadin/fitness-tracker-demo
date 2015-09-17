@@ -49,7 +49,7 @@
             <span class="h1">Workouts</span>
             <span class="h2">Current week <span>36</span></span>
         </app-toolbar>
-        <div class="progress-circles">
+        <div class="progress-circles" on-tap="_showDetails">
             <progress-bubble stroke-width="35" max="100" value="25">25%</progress-bubble>
             <progress-bubble stroke-width="35" max="100" value="38">38%</progress-bubble>
             <progress-bubble stroke-width="35" max="100" value="78">78%</progress-bubble>
@@ -77,6 +77,9 @@
                         };
                     }
                 }
+            },
+            _showDetails: function() {
+                this.fire('navigate', 'details');
             }
         });
     </script>

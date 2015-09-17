@@ -117,6 +117,13 @@
                 margin-right: 8px;
             }
 
+            app-toolbar #back-button {
+                background: var(--secondary-color);
+                padding: 5px;
+                border-radius: 4px;
+                display: inline-block;
+                cursor: pointer;
+            }
             /*
             @media (min-width: 600px) {
                 vaadin-grid ::content .workout-details {
@@ -149,7 +156,7 @@
         <div class="layout vertical" style="min-height: 100%">
             <app-toolbar>
                 <span class="h1">Workout details</span>
-                <span class="h2">Current week <span>36</span></span>
+                <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
             </app-toolbar>
             <vaadin-grid class="flex" frozen-columns="1" selection-mode="disabled" id="workoutGrid">
                 <table>
@@ -267,6 +274,10 @@
                         }
                     ]
                 }
+            },
+
+            _navigateBack: function() {
+                this.fire('navigate', 'summary');
             },
 
             ready: function() {

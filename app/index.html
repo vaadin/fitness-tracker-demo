@@ -11,21 +11,21 @@
     </head>
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
-            <neon-animated-pages class="flex" style="height: 100%" selected="[[selected]]">
-                <summary-view on-tap="showDetails"></summary-view>
-                <workouts-view></workouts-view>
+            <neon-animated-pages class="flex" style="height: 100%" selected="[[selected]]" attr-for-selected="name">
+                <summary-view name="summary"></summary-view>
+                <workouts-view name="details"></workouts-view>
             </neon-animated-pages>
         </template>
 
         <script>
             var app = document.querySelector('#app');
-            app.selected = 0;
+            app.selected = 'summary';
             app.addEventListener('dom-change', function() {
                 // ...
             });
-            app.showDetails = function() {
-                app.selected = 1;
-            }
+            document.addEventListener('navigate', function(e) {
+                app.selected = e.detail;
+            });
         </script>
     </body>
 </html>
