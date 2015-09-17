@@ -3,10 +3,13 @@
     <template>
         <style include="app-theme"></style>
         <style>
+            :host {
+                display: block;
+                height: 100%;
+            }
             vaadin-grid {
                 color: #00bfa5;
                 font-weight: 500;
-                height: 100%;
             }
             vaadin-grid ::content thead {
                 box-shadow: none;
@@ -142,22 +145,25 @@
                 }
             }*/
         </style>
-        <paper-toolbar>
-            <h1>Workouts</h1>
-        </paper-toolbar>
 
-        <vaadin-grid frozen-columns="1" selection-mode="disabled" id="workoutGrid">
-            <table>
-                <colgroup>
-                    <col width="20" />
-                    <col name="date" header-text="DATE" sortable />
-                    <col name="distance" header-text="DISTANCE" sortable />
-                    <col name="duration" header-text="TIME" sortable />
-                    <col name="calories" header-text="CALORIES" sortable />
-                    <col name="avgPace" header-text="AVG PACE" sortable />
-                </colgroup>
-            </table>
-        </vaadin-grid>
+        <div class="layout vertical" style="min-height: 100%">
+            <app-toolbar>
+                <span class="h1">Workout details</span>
+                <span class="h2">Current week <span>36</span></span>
+            </app-toolbar>
+            <vaadin-grid class="flex" frozen-columns="1" selection-mode="disabled" id="workoutGrid">
+                <table>
+                    <colgroup>
+                        <col width="20" />
+                        <col name="date" header-text="DATE" sortable />
+                        <col name="distance" header-text="DISTANCE" sortable />
+                        <col name="duration" header-text="TIME" sortable />
+                        <col name="calories" header-text="CALORIES" sortable />
+                        <col name="avgPace" header-text="AVG PACE" sortable />
+                    </colgroup>
+                </table>
+            </vaadin-grid>
+        </div>
         <div style="display: none" id="templateWrapper">
             <template is="dom-bind" id="workoutDetails">
                 <div class="workout-details">
@@ -196,8 +202,24 @@
     <script>
         Polymer({
             is: 'workouts-view',
-
+            behaviors: [
+                Polymer.NeonAnimatableBehavior
+            ],
             properties: {
+                animationConfig: {
+                    value: function() {
+                        return {
+                            'entry': {
+                                name: 'slide-from-right-animation',
+                                node: this
+                            },
+                            'exit': {
+                                name: 'slide-right-animation',
+                                node: this
+                            }
+                        };
+                    }
+                },
                 workouts: {
                     type: Array,
                     value: [

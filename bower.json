@@ -10,6 +10,7 @@
     "iron-flex-layout": "polymerelements/iron-flex-layout#~1.0.3",
     "iron-icon": "polymerelements/iron-icon#~1.0.4",
     "moment": "~2.10.6",
+    "neon-animation": "polymerelements/neon-animation#~1.0.6",
     "page": "page.js#~1.6.3",
     "paper-toolbar": "polymerelements/paper-toolbar#~1.0.4",
     "polymer": "~1.1.3",

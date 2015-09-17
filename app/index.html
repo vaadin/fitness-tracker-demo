@@ -10,7 +10,22 @@
         <style is="custom-style" include="app-theme"></style>
     </head>
     <body unresolved class="fullbleed">
-        <summary-view></summary-view>
-        <workouts-view></workouts-view>
+        <template is="dom-bind" id="app">
+            <neon-animated-pages class="flex" style="height: 100%" selected="[[selected]]">
+                <summary-view on-tap="showDetails"></summary-view>
+                <workouts-view></workouts-view>
+            </neon-animated-pages>
+        </template>
+
+        <script>
+            var app = document.querySelector('#app');
+            app.selected = 0;
+            app.addEventListener('dom-change', function() {
+                // ...
+            });
+            app.showDetails = function() {
+                app.selected = 1;
+            }
+        </script>
     </body>
 </html>

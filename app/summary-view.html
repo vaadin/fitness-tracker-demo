@@ -3,6 +3,9 @@
     <template>
         <style include="app-theme"></style>
         <style>
+            :host {
+                display: block;
+            }
             .progress-circles {
                 position: relative;
                 width: 300px;
@@ -42,9 +45,10 @@
                 margin-left: calc((100% - 2 * 70px) / -2);
             }
         </style>
-        <paper-toolbar>
-            <h1>Workouts Summary</h1>
-        </paper-toolbar>
+        <app-toolbar>
+            <span class="h1">Workouts</span>
+            <span class="h2">Current week <span>36</span></span>
+        </app-toolbar>
         <div class="progress-circles">
             <progress-bubble stroke-width="35" max="100" value="25">25%</progress-bubble>
             <progress-bubble stroke-width="35" max="100" value="38">38%</progress-bubble>
@@ -54,7 +58,26 @@
 
     <script>
         Polymer({
-            is: 'summary-view'
+            is: 'summary-view',
+            behaviors: [
+                Polymer.NeonAnimatableBehavior
+            ],
+            properties: {
+                animationConfig: {
+                    value: function() {
+                        return {
+                            'entry': {
+                                name: 'slide-from-left-animation',
+                                node: this
+                            },
+                            'exit': {
+                                name: 'slide-left-animation',
+                                node: this
+                            }
+                        };
+                    }
+                }
+            }
         });
     </script>
 </dom-module>

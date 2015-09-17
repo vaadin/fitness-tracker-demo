@@ -1,0 +1,43 @@
+<dom-module id="app-toolbar">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            h1 {
+                font-weight: 100;
+                color: black !important;
+                text-transform: uppercase;
+                text-align: center;
+            }
+            .logo {
+                background: var(--secondary-color);
+                border-radius: 50%;
+                padding: 10px;
+            }
+            .logo img {
+                display: block;
+            }
+        </style>
+        <paper-toolbar class="medium-tall" style="height: 110px">
+            <div class="flex top layout horizontal center">
+                <div class="logo">
+                    <img src="resources/finish-flag-icon.png" width="32" height="32" />
+                </div>
+                <div class="flex">
+                    <h1 style="padding: 0; margin: 0"><content select=".h1"></content></h1>
+                    <h2 style="padding: 0; margin: 0; text-align: center; font-weight: normal; font-size: 14px"><content select=".h2"></content></h2>
+                </div>
+                <div style="width: 42px; height: 42px">Y</div>
+            </div>
+            <div class="flex bottom">
+                <div style="text-align: center">31st August – 6th September</div>
+            </div>
+        </paper-toolbar>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-toolbar'
+        });
+    </script>
+</dom-module>
