@@ -5,25 +5,16 @@
                 display: block;
             }
             h1 {
+                font-size: 28px;
                 font-weight: 100;
                 color: black !important;
                 text-transform: uppercase;
                 text-align: center;
             }
-            .logo {
-                background: var(--secondary-color);
-                border-radius: 50%;
-                padding: 10px;
-            }
-            .logo img {
-                display: block;
-            }
         </style>
-        <paper-toolbar class="medium-tall" style="height: 110px">
+        <paper-toolbar class="medium-tall">
             <div class="flex top layout horizontal center">
-                <div class="logo">
-                    <img src="resources/finish-flag-icon.png" width="32" height="32" />
-                </div>
+                <app-logo></app-logo>
                 <div class="flex">
                     <h1 style="padding: 0; margin: 0"><content select=".h1"></content></h1>
                     <h2 style="padding: 0; margin: 0; text-align: center; font-weight: normal; font-size: 14px"><content select=".h2"></content></h2>

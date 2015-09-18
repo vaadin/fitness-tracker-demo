@@ -1,0 +1,25 @@
+<dom-module id="app-logo">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            .logo {
+                background: var(--secondary-color);
+                border-radius: 50%;
+                padding: 10px;
+            }
+            .logo img {
+                display: block;
+            }
+        </style>
+        <div class="logo">
+            <img src="resources/finish-flag-icon.png" width="32" height="32" />
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'app-logo'
+        });
+    </script>
+</dom-module>
