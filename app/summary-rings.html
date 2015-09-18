@@ -1,0 +1,81 @@
+<link rel="import" href="app-theme.html" />
+<dom-module id="summary-rings">
+    <template>
+        <style include="app-theme"></style>
+        <style>
+            :host {
+                display: block;
+            }
+            .progress-circles {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                margin: 20px auto;
+            }
+            progress-bubble {
+                text-shadow: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                color: #004d3f;
+                font-weight: bold;
+                font-size: 14px;
+
+                --progress-bubble-stroke-color: #06c2a5;
+                --progress-bubble-bg-stroke-color: #eff8f8;
+                --progress-bubble-background: transparent;
+                --progress-bubble-reflection-display: none;
+                --progress-bubble-transition-duration: 1500ms;
+            }
+            progress-bubble:nth-child(2) {
+                width: calc(100% - 70px);
+                height: calc(100% - 70px);
+                top: 50%;
+                left: 50%;
+                margin-top: calc((100% - 70px) / -2);
+                margin-left: calc((100% - 70px) / -2);
+                --progress-bubble-transition-duration: 1000ms;
+            }
+            progress-bubble:nth-child(3) {
+                width: calc(100% - 2 * 70px);
+                height: calc(100% - 2 * 70px);
+                top: 50%;
+                left: 50%;
+                margin-top: calc((100% - 2 * 70px) / -2);
+                margin-left: calc((100% - 2 * 70px) / -2);
+                --progress-bubble-transition-duration: 500ms;
+            }
+            .content {
+                background: var(--text-primary-color);
+                color: #fff;
+                border-radius: 50%;
+                width: 90px;
+                height: 90px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -45px;
+                margin-left: -45px;
+            }
+        </style>
+        <div class="progress-circles">
+            <template is="dom-repeat" items="[[summaryRows]]">
+                <progress-bubble stroke-width="35" max="100" value$="[[item.value]]"><span>[[item.value]]</span>%</progress-bubble>
+            </template>
+            <div class="layout vertical center-center content"><content></content></div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'summary-rings',
+
+            properties: {
+                summaryRows: Array
+            }
+        });
+    </script>
+</dom-module>

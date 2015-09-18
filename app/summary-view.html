@@ -6,54 +6,22 @@
             :host {
                 display: block;
             }
-            .progress-circles {
-                position: relative;
-                width: 300px;
-                height: 300px;
-                margin: 20px auto;
-            }
-            progress-bubble {
-                text-shadow: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                color: #004d3f;
+            summary-rings {
                 font-weight: bold;
-                font-size: 14px;
-                --progress-bubble-stroke-color: #06c2a5;
-                --progress-bubble-bg-stroke-color: #eff8f8;
-                --progress-bubble-background: transparent;
-                --progress-bubble-reflection-display: none;
+                font-size: 24px;
             }
-            progress-bubble:nth-child(2) {
-                width: calc(100% - 70px);
-                height: calc(100% - 70px);
-                top: 50%;
-                left: 50%;
-                margin-top: calc((100% - 70px) / -2);
-                margin-left: calc((100% - 70px) / -2);
-            }
-            progress-bubble:nth-child(3) {
-                width: calc(100% - 2 * 70px);
-                height: calc(100% - 2 * 70px);
-                top: 50%;
-                left: 50%;
-                margin-top: calc((100% - 2 * 70px) / -2);
-                margin-left: calc((100% - 2 * 70px) / -2);
+            summary-rings small {
+                font-weight: 100;
+                font-size: 18px;
             }
         </style>
         <app-toolbar>
             <span class="h1">Workouts</span>
             <span class="h2">Current week <span>36</span></span>
         </app-toolbar>
-        <div class="progress-circles" on-tap="_showDetails">
-            <progress-bubble stroke-width="35" max="100" value="25">25%</progress-bubble>
-            <progress-bubble stroke-width="35" max="100" value="38">38%</progress-bubble>
-            <progress-bubble stroke-width="35" max="100" value="78">78%</progress-bubble>
-        </div>
+        <summary-rings id="summary" on-tap="_showDetails">
+            <small>Total</small><span>75%</span>
+        </summary-rings>
     </template>
 
     <script>
@@ -77,6 +45,20 @@
                         };
                     }
                 }
+            },
+            ready: function() {
+                this.$.summary.summaryRows = [
+                    { value: 15 },
+                    { value: 38 },
+                    { value: 78 }
+                ];
+                window.setInterval(function() {
+                    this.$.summary.summaryRows = [
+                        { value: Math.round(Math.random() * 100) },
+                        { value: Math.round(Math.random() * 100) },
+                        { value: Math.round(Math.random() * 100) }
+                    ];
+                }.bind(this), 2000);
             },
             _showDetails: function() {
                 this.fire('navigate', 'details');

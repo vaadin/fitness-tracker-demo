@@ -38,7 +38,14 @@
             height: 100%;
             @apply(--layout-vertical);
             @apply(--layout-center-center);
-            transition: all 150ms;
+            z-index: 10;
+            position: relative;
+            transition: all var(--progress-bubble-transition-duration, 150ms);
+        }
+        #content span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2px;
+            border-radius: 4px;
         }
         svg {
             position: absolute;
@@ -49,12 +56,11 @@
             stroke: var(--progress-bubble-bg-stroke-color, rgba(255, 255, 255, 0.1));
         }
         #svgCircle {
-            transition: stroke-dashoffset 150ms;
+            transition: stroke-dashoffset var(--progress-bubble-transition-duration, 150ms) ease-out;
             /*stroke: var(--progress-bubble-stroke-color, rgba(0, 240, 45, 0.8));*/
         }
     </style>
     <template>
-
         <svg id="progressArc" width="100%" height="100%">
             <defs>
                 <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -73,7 +79,7 @@
                 transform$="[[_transform]]" />
         </svg>
         <div id="reflection"></div>
-        <div id="content"><content></content></div>
+        <div id="content"><span><content></content></span></div>
     </template>
 </dom-module>
 <script>
@@ -132,7 +138,7 @@
             return 'rotate(-90, ' + _cx + ', ' + _cy + ')';
         },
         _updateContentPosition: function() {
-            var angle = 2 * Math.PI * (this.value / this.max) - Math.PI / 2 - 0.15;
+            var angle = 2 * Math.PI * (this.value / this.max) - Math.PI / 2;
             var x = Math.cos(angle) * this._radius;
             var y = Math.sin(angle) * this._radius;
             this.$.content.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
