@@ -28,7 +28,7 @@
                 --progress-bubble-bg-stroke-color: #eff8f8;
                 --progress-bubble-background: transparent;
                 --progress-bubble-reflection-display: none;
-                --progress-bubble-transition-duration: 1500ms;
+                --progress-bubble-transition-duration: 1000ms;
             }
             progress-bubble:nth-child(2) {
                 width: calc(100% - 70px);
@@ -37,7 +37,7 @@
                 left: 50%;
                 margin-top: calc((100% - 70px) / -2);
                 margin-left: calc((100% - 70px) / -2);
-                --progress-bubble-transition-duration: 1000ms;
+                --progress-bubble-transition-duration: 750ms;
             }
             progress-bubble:nth-child(3) {
                 width: calc(100% - 2 * 70px);
@@ -60,12 +60,26 @@
                 margin-top: -45px;
                 margin-left: -45px;
             }
+            .content {
+                font-weight: bold;
+                font-size: 24px;
+            }
+            .content small {
+                font-weight: 100;
+                font-size: 18px;
+            }
         </style>
         <div class="progress-circles">
             <template is="dom-repeat" items="[[summaryRows]]">
-                <progress-bubble stroke-width="35" max="100" value$="[[item.value]]"><span>[[item.value]]</span>%</progress-bubble>
+                <progress-bubble stroke-width="35" max="100" value$="[[item.value]]">
+                    <iron-icon src$="[[_iconUrl(item.sport)]]"></iron-icon>
+                    <span>[[item.value]]</span>%
+                </progress-bubble>
             </template>
-            <div class="layout vertical center-center content"><content></content></div>
+            <div class="layout vertical center-center content">
+                <small>Total</small>
+                <span id="odometer" class="odometer">[[_getTotal(summaryRows)]]</span>
+            </div>
         </div>
     </template>
 
@@ -75,6 +89,16 @@
 
             properties: {
                 summaryRows: Array
+            },
+
+            _iconUrl: function(sport) {
+                return 'resources/sport-icons/' + sport + '/' + sport + '-75.png';
+            },
+
+            _getTotal: function(summaryRows) {
+                var total = summaryRows.length * 100;
+                var score = summaryRows.reduce(function(acc, row) { return acc + row.value }, 0);
+                return Math.round(score / total * 100) + '%';
             }
         });
     </script>

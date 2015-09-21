@@ -47,6 +47,18 @@
             padding: 2px;
             border-radius: 4px;
         }
+        #icon {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            left: 50%;
+            top: 6px;
+            margin-left: 4px;
+        }
+        #icon {
+            -webkit-filter: invert();
+            filter: invert();
+        }
         svg {
             position: absolute;
             top: 0;
@@ -79,6 +91,7 @@
                 transform$="[[_transform]]" />
         </svg>
         <div id="reflection"></div>
+        <div id="icon"><content select="iron-icon"></content></div>
         <div id="content"><span><content></content></span></div>
     </template>
 </dom-module>

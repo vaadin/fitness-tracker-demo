@@ -6,22 +6,12 @@
             :host {
                 display: block;
             }
-            summary-rings {
-                font-weight: bold;
-                font-size: 24px;
-            }
-            summary-rings small {
-                font-weight: 100;
-                font-size: 18px;
-            }
         </style>
         <app-toolbar>
             <span class="h1">Workouts</span>
             <span class="h2">Current week <span>36</span></span>
         </app-toolbar>
-        <summary-rings id="summary" on-tap="_showDetails">
-            <small>Total</small><span>75%</span>
-        </summary-rings>
+        <summary-rings id="summary" on-tap="_showDetails"></summary-rings>
     </template>
 
     <script>
@@ -46,17 +36,21 @@
                     }
                 }
             },
+            _getTotal: function(summaryRows) {
+                console.log('total');
+                return summaryRows[0].value + '%';
+            },
             ready: function() {
                 this.$.summary.summaryRows = [
-                    { value: 15 },
-                    { value: 38 },
-                    { value: 78 }
+                    { sport: 'running', value: 15 },
+                    { sport: 'tennis', value: 38 },
+                    { sport: 'swimming', value: 78 }
                 ];
                 window.setInterval(function() {
                     this.$.summary.summaryRows = [
-                        { value: Math.round(Math.random() * 100) },
-                        { value: Math.round(Math.random() * 100) },
-                        { value: Math.round(Math.random() * 100) }
+                        { sport: 'running', value: Math.round(Math.random() * 100) },
+                        { sport: 'tennis', value: Math.round(Math.random() * 100) },
+                        { sport: 'swimming', value: Math.round(Math.random() * 100) }
                     ];
                 }.bind(this), 2000);
             },
