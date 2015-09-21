@@ -6,12 +6,28 @@
             :host {
                 display: block;
             }
+            .h2 span {
+                background: var(--text-primary-color);
+                color: #fff;
+                border-radius: 50%;
+                width: 1.8em;
+                height: 1.8em;
+                line-height: 1.8em;
+                display: inline-block;
+            }
         </style>
         <app-toolbar>
             <span class="h1">Workouts</span>
-            <span class="h2">Current week <span>36</span></span>
+            <span class="h2">Selected week <span>[[weekData.weekNumber]]</span></span>
+            <span class="details">
+                <span>[[_weekStartDate(weekData.weekNumber)]]</span>
+                &ndash;
+                <span>[[_weekEndDate(weekData.weekNumber)]]</span>
+            </span>
         </app-toolbar>
-        <summary-rings id="summary" on-tap="_showDetails"></summary-rings>
+        <button id="prev" on-tap="_prevWeek">Prev week</button>
+        <button id="next" on-tap="_nextWeek">Next week</button>
+        <summary-rings id="summary" summary-rows="[[weekData.summary]]" on-tap="_showDetails"></summary-rings>
     </template>
 
     <script>
@@ -21,6 +37,7 @@
                 Polymer.NeonAnimatableBehavior
             ],
             properties: {
+                weekData: Array,
                 animationConfig: {
                     value: function() {
                         return {
@@ -36,23 +53,21 @@
                     }
                 }
             },
+            _weekStartDate: function(weekNumber) {
+                return moment('2015-W' + weekNumber).startOf('week').format('Do MMMM');
+            },
+            _weekEndDate: function(weekNumber) {
+                return moment('2015-W' + weekNumber).endOf('week').format('Do MMMM');
+            },
+            _nextWeek: function() {
+                this.fire('next-week');
+            },
+            _prevWeek: function() {
+                this.fire('prev-week');
+            },
             _getTotal: function(summaryRows) {
                 console.log('total');
                 return summaryRows[0].value + '%';
-            },
-            ready: function() {
-                this.$.summary.summaryRows = [
-                    { sport: 'running', value: 15 },
-                    { sport: 'tennis', value: 38 },
-                    { sport: 'swimming', value: 78 }
-                ];
-                window.setInterval(function() {
-                    this.$.summary.summaryRows = [
-                        { sport: 'running', value: Math.round(Math.random() * 100) },
-                        { sport: 'tennis', value: Math.round(Math.random() * 100) },
-                        { sport: 'swimming', value: Math.round(Math.random() * 100) }
-                    ];
-                }.bind(this), 2000);
             },
             _showDetails: function() {
                 this.fire('navigate', 'details');

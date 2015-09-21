@@ -11,20 +11,41 @@
     </head>
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
+            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" />
+
             <neon-animated-pages class="flex" style="height: 100%" selected="[[selected]]" attr-for-selected="name">
-                <summary-view name="summary"></summary-view>
+                <summary-view week-data="[[weekData]]" name="summary"></summary-view>
                 <workouts-view name="details"></workouts-view>
             </neon-animated-pages>
         </template>
 
         <script>
+            // Configure Moment.js to start the week on Monday.
+            moment.locale('en', {
+                 week: {
+                     dow: 1
+                 }
+            });
+
             var app = document.querySelector('#app');
             app.selected = 'summary';
+            app.week = 39;
+
+            app.dataUrl = function(week) {
+                return 'data/week-' + week + '.json';
+            }
+
             app.addEventListener('dom-change', function() {
                 // ...
             });
             document.addEventListener('navigate', function(e) {
                 app.selected = e.detail;
+            });
+            document.addEventListener('next-week', function(e) {
+                app.week++;
+            });
+            document.addEventListener('prev-week', function(e) {
+                app.week--;
             });
         </script>
     </body>
