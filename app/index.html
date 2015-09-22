@@ -14,9 +14,9 @@
         <template is="dom-bind" id="app">
             <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" />
 
-            <neon-animated-pages class="flex" style="height: 100%" selected="[[selected]]" attr-for-selected="name">
+            <neon-animated-pages id="pages" class="flex" style="height: 100%" selected="[[selected]]" attr-for-selected="name">
                 <summary-view week-data="[[weekData]]" name="summary"></summary-view>
-                <workouts-view name="details"></workouts-view>
+                <workouts-view week-data="[[weekData]]" name="details"></workouts-view>
             </neon-animated-pages>
         </template>
 
@@ -37,7 +37,11 @@
             }
 
             app.addEventListener('dom-change', function() {
-                // ...
+                this.$.pages.addEventListener('neon-animation-finish', function(e) {
+                    if (e.detail.toPage.pageTransitionFinished) {
+                        e.detail.toPage.pageTransitionFinished();
+                    }
+                });
             });
             document.addEventListener('navigate', function(e) {
                 app.selected = e.detail;
@@ -48,6 +52,7 @@
             document.addEventListener('prev-week', function(e) {
                 app.week--;
             });
+
         </script>
     </body>
 </html>
