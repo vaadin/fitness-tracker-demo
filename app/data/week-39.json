@@ -39,7 +39,21 @@
         "maxAlt": 122,
         "ascent": 19
     }, {
-        "sport": "running",
+        "sport": "skiing",
+        "date": "2015-09-05T18:25:43.511Z",
+        "distance": 1005,
+        "duration": 3043,
+        "weather": "Dry",
+        "humidity": 5,
+        "temperature": 22,
+        "calories": 1516,
+        "avgPace": 397,
+        "maxPace": 280,
+        "minAlt": 103,
+        "maxAlt": 122,
+        "ascent": 19
+    }, {
+        "sport": "skiing",
         "date": "2015-09-03T18:25:43.511Z",
         "distance": 500,
         "duration": 62,

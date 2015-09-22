@@ -28,6 +28,12 @@
         <button id="prev" on-tap="_prevWeek">Prev week</button>
         <button id="next" on-tap="_nextWeek">Next week</button>
         <summary-rings id="summary" summary-rows="[[weekData.summary]]" on-tap="_showDetails"></summary-rings>
+
+        <div id="summary-tables">
+            <template is="dom-repeat" items="[[_workoutsBySport(weekData)]]">
+                <summary-table workouts="[[item]]"></summary-table>
+            </template>
+        </div>
     </template>
 
     <script>
@@ -52,6 +58,24 @@
                         };
                     }
                 }
+            },
+            _workoutsBySport: function(weekData) {
+                var sports = weekData.workouts.reduce(function(result, workout) {
+                    if (result.indexOf(workout.sport) === -1) {
+                        result.push(workout.sport);
+                    }
+                    return result;
+                }, []);
+
+                var result = [];
+                weekData.workouts.forEach(function(workout) {
+                    var index = sports.indexOf(workout.sport);
+                    if (!result[index]) {
+                        result[index] = [];
+                    }
+                    result[index].push(workout);
+                });
+                return result;
             },
             _weekStartDate: function(weekNumber) {
                 return moment('2015-W' + weekNumber).startOf('week').format('Do MMMM');

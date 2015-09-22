@@ -154,6 +154,7 @@
             var angle = 2 * Math.PI * (this.value / this.max) - Math.PI / 2;
             var x = Math.cos(angle) * this._radius;
             var y = Math.sin(angle) * this._radius;
+            this.$.content.style.webkitTransform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
             this.$.content.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
         },
         redraw: function() {

@@ -1,0 +1,110 @@
+<link rel="import" href="app-theme.html" />
+<dom-module id="summary-table">
+    <template>
+        <style include="app-theme"></style>
+        <style>
+            :host {
+                display: block;
+            }
+            #head {
+                color: #fff;
+                background: #00bfa5;
+                font-size: 12px;
+            }
+            #head span {
+                display: inline-block;
+            }
+            #sport,
+            #status {
+                padding: 6px 12px;
+            }
+            #sport {
+                min-width: 80px;
+                position: relative;
+                background: var(--text-primary-color);
+                text-transform: uppercase;
+            }
+            #sport:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -5px;
+                display: block;
+                width: 10px;
+                height: 100%;
+                background: inherit;
+                -webkit-transform: skew(-15deg);
+                transform: skew(-15deg);
+            }
+            #status {
+                float: right;
+            }
+            table {
+                width: 100%;
+                color: #00bfa5;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            table tr:nth-child(odd) {
+                background: #eff8f8;
+            }
+            table td {
+                padding: 8px 15px;
+            }
+        </style>
+        <iron-icon src$="[[_iconUrl(sport)]]" class="huge"></iron-icon>
+        <h2>[[_formatDistance(totalDistance)]]</h2>
+        <div id="head">
+            <span id="sport">[[sport]]</span>
+            <span id="status">76% complete – 9.55 km to goal</span>
+        </div>
+        <table cellpadding="0" cellspacing="0">
+            <template is="dom-repeat" items=[[workouts]]>
+                <tr>
+                    <td>[[_formatDate(item.date)]]</td>
+                    <td>[[_formatDistance(item.distance)]]</td>
+                </tr>
+            </template>
+            <tr>
+                <td colspan="2">+ 2 MORE RUNNING WORKOUTS</td>
+            </tr>
+        </table>
+    </template>
+    <script>
+        Polymer({
+            is: 'summary-table',
+
+            properties: {
+                workouts: Array,
+                sport: {
+                    type: String,
+                    computed: '_computeSport(workouts)'
+                },
+                totalDistance: {
+                    type: Number,
+                    computed: '_computeTotalDistance(workouts)'
+                }
+            },
+
+            _formatDate: function(date) {
+                return Formatters.date(date);
+            },
+
+            _formatDistance: function(distance) {
+                return Formatters.distance(distance);
+            },
+
+            _computeSport: function(workouts) {
+                return workouts[0].sport;
+            },
+
+            _computeTotalDistance: function(workouts) {
+                return workouts.reduce(function(acc, workout) { return acc += workout.distance; }, 0);
+            },
+
+            _iconUrl: function(sport) {
+                return 'resources/sport-icons/' + sport + '/' + sport + '-512.png';
+            }
+        });
+    </script>
+</dom-module>

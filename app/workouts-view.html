@@ -282,7 +282,7 @@
 
             ready: function() {
                 var template = this.$.workoutDetails;
-                template.formatDuration = this._formatDuration;
+                template.formatDuration = Formatters.duration;
                 template.formatAscent = function(ascent) {
                     return (ascent > 0 ? '+' + ascent : ascent);
                 }
@@ -295,23 +295,19 @@
                 var self = this;
                 var renderers = {
                     date: function(cell) {
-                        cell.element.innerHTML = moment(cell.data).fromNow().toUpperCase();
+                        cell.element.innerHTML = Formatters.date(cell.data);
                     },
                     distance: function(cell) {
-                        if (cell.data >= 1000) {
-                            cell.element.innerHTML = (cell.data / 1000).toFixed(2) + ' km';
-                        } else {
-                            cell.element.innerHTML = cell.data + ' m';
-                        }
+                        cell.element.innerHTML = Formatters.distance(cell.data);
                     },
                     duration: function(cell) {
-                        cell.element.innerHTML = self._formatDuration(cell.data, true);
+                        cell.element.innerHTML = Formatters.duration(cell.data, true);
                     },
                     calories: function(cell) {
                         cell.element.innerHTML = cell.data + ' kcal';
                     },
                     pace: function(cell) {
-                        cell.element.innerHTML = self._formatDuration(cell.data) + ' min/km';
+                        cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
                     },
                     toggle: function(cell) {
                         var toggle = document.createElement('div');
@@ -364,20 +360,6 @@
                 var detailsTemplate = document.getElementById('workout-details');
                 detailsTemplate.workout = workout;
                 return this.$.templateWrapper.querySelector('.workout-details').innerHTML;
-            },
-
-            _formatDuration: function(seconds, displayHours) {
-                if (arguments.length === 1) {
-                    displayHours = false;
-                }
-                var duration = moment.duration(seconds, 'seconds')
-                var format = '';
-                if (displayHours) {
-                    format += duration.hours() + ':';
-                }
-                format += (duration.minutes() < 10 ? '0' + duration.minutes() : duration.minutes());
-                format += ':' + (duration.seconds() < 10 ? '0' + duration.seconds() : duration.seconds());
-                return format;
             }
         });
     </script>
