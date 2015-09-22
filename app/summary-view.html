@@ -15,6 +15,19 @@
                 line-height: 1.8em;
                 display: inline-block;
             }
+            #prev,
+            #next {
+                color: var(--text-primary-color);
+                background: none;
+                border: none;
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: bold;
+                margin: 8px;
+            }
+            #next {
+                float: right;
+            }
         </style>
         <app-toolbar>
             <span class="h1">Workouts</span>
@@ -25,7 +38,7 @@
                 <span>[[_weekEndDate(weekData.weekNumber)]]</span>
             </span>
         </app-toolbar>
-        <button id="prev" on-tap="_prevWeek">Prev week</button>
+        <button id="prev" on-tap="_prevWeek">Previous week</button>
         <button id="next" on-tap="_nextWeek">Next week</button>
         <summary-rings id="summary" summary-rows="[[weekData.summary]]" on-tap="_showDetails"></summary-rings>
 
