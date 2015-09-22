@@ -71,8 +71,8 @@
         </style>
         <div class="progress-circles">
             <template is="dom-repeat" items="[[summaryRows]]">
-                <progress-bubble stroke-width="35" max="100" value$="[[item.value]]">
-                    <iron-icon src$="[[_iconUrl(item.sport)]]"></iron-icon>
+                <progress-bubble stroke-width="35" max="100" value="[[item.value]]">
+                    <iron-icon src="[[_iconUrl(item.sport)]]"></iron-icon>
                     <span>[[item.value]]</span>%
                 </progress-bubble>
             </template>
