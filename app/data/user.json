@@ -1,4 +1,17 @@
 {
     "name": "John Doe",
-    "avatarUrl": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg"
+    "avatarUrl": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg",
+    "goals": [{
+        "sport": "running",
+        "type": "distance",
+        "goal": 20000
+    }, {
+        "sport": "swimming",
+        "type": "distance",
+        "goal": 1000
+    }, {
+        "sport": "tennis",
+        "type": "duration",
+        "goal": 120
+    }]
 }

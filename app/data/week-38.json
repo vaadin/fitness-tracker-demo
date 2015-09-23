@@ -1,15 +1,5 @@
 {
     "weekNumber": 38,
-    "summary": [{
-        "sport": "running",
-        "value": 71
-    }, {
-        "sport": "tennis",
-        "value": 19
-    }, {
-        "sport": "swimming",
-        "value": 28
-    }],
     "workouts": [{
         "sport": "running",
         "date": "2015-09-08T08:25:43.511Z",

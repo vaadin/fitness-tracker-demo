@@ -46,7 +46,7 @@
         </app-toolbar>
         <button id="prev" on-tap="_prevWeek">Previous week</button>
         <button id="next" on-tap="_nextWeek">Next week</button>
-        <summary-rings id="summary" summary-rows="[[weekData.summary]]" on-tap="_showDetails"></summary-rings>
+        <summary-rings id="summary" summary-rows="[[_goalSummary(weekData)]]" on-tap="_showDetails"></summary-rings>
 
         <div id="summary-tables">
             <template is="dom-repeat" items="[[_workoutsBySport(weekData)]]">
@@ -79,13 +79,44 @@
                     }
                 }
             },
-            _workoutsBySport: function(weekData) {
-                var sports = weekData.workouts.reduce(function(result, workout) {
+            _goalSummary: function(weekData) {
+                var totals = this._totalsBySport(weekData);
+                return this.user.goals.map(function(goal) {
+                    var achieved = 0;
+                    if (totals[goal.sport]) {
+                        achieved = Math.round((totals[goal.sport][goal.type] / goal.goal * 100));
+                    }
+                    return {
+                        sport: goal.sport,
+                        value: achieved
+                    };
+                });
+            },
+            _uniqueSports: function(weekData) {
+                return weekData.workouts.reduce(function(result, workout) {
                     if (result.indexOf(workout.sport) === -1) {
                         result.push(workout.sport);
                     }
                     return result;
                 }, []);
+
+            },
+            _totalsBySport: function(weekData) {
+                var result = {};
+                weekData.workouts.forEach(function(workout) {
+                    if (!result[workout.sport]) {
+                        result[workout.sport] = {
+                            duration: 0,
+                            distance: 0
+                        };
+                    }
+                    result[workout.sport].duration += workout.duration;
+                    result[workout.sport].distance += workout.distance;
+                });
+                return result;
+            },
+            _workoutsBySport: function(weekData) {
+                var sports = this._uniqueSports(weekData);
 
                 var result = [];
                 weekData.workouts.forEach(function(workout) {

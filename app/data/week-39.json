@@ -1,15 +1,5 @@
 {
     "weekNumber": 39,
-    "summary": [{
-        "sport": "running",
-        "value": 45
-    }, {
-        "sport": "tennis",
-        "value": 38
-    }, {
-        "sport": "swimming",
-        "value": 78
-    }],
     "workouts": [{
         "sport": "running",
         "date": "2015-09-08T08:25:43.511Z",
@@ -29,6 +19,34 @@
         "date": "2015-09-05T18:25:43.511Z",
         "distance": 1005,
         "duration": 3043,
+        "weather": "Dry",
+        "humidity": 5,
+        "temperature": 22,
+        "calories": 1516,
+        "avgPace": 397,
+        "maxPace": 280,
+        "minAlt": 103,
+        "maxAlt": 122,
+        "ascent": 19
+    }, {
+        "sport": "swimming",
+        "date": "2015-09-05T18:25:43.511Z",
+        "distance": 500,
+        "duration": 50,
+        "weather": "Dry",
+        "humidity": 5,
+        "temperature": 22,
+        "calories": 1516,
+        "avgPace": 397,
+        "maxPace": 280,
+        "minAlt": 103,
+        "maxAlt": 122,
+        "ascent": 19
+    }, {
+        "sport": "tennis",
+        "date": "2015-09-05T18:25:43.511Z",
+        "distance": 0,
+        "duration": 45,
         "weather": "Dry",
         "humidity": 5,
         "temperature": 22,
