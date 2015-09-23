@@ -17,15 +17,23 @@
             }
             #prev,
             #next {
+                outline: none;
+                cursor: pointer;
                 color: var(--text-primary-color);
                 background: none;
                 border: none;
+                border-bottom: 1px solid transparent;
                 font-size: 12px;
                 text-transform: uppercase;
                 font-weight: bold;
                 margin: 8px;
                 position: relative;
                 z-index: 10;
+                transition: all 400ms;
+            }
+            #prev:focus,
+            #next:focus {
+                border-bottom: 1px solid var(--text-primary-color);
             }
             #next {
                 float: right;
