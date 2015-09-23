@@ -66,21 +66,22 @@
             }
         </style>
         <iron-icon src="[[_iconUrl(sport)]]" class="huge"></iron-icon>
-        <h2>[[_formatDistance(totalDistance)]]</h2>
+        <h2><span>[[_formatDistance(totalDistance)]]</span> / <span>[[_formatDuration(totalDuration)]]</span></h2>
         <div id="head">
             <span id="sport">[[sport]]</span>
-            <span id="status">76% complete – 9.55 km to goal</span>
+            <span id="status">[[_goalStatus(goals, sport)]]</span>
         </div>
         <table cellpadding="0" cellspacing="0">
             <template is="dom-repeat" items="[[workouts]]">
                 <tr>
                     <td>[[_formatDate(item.date)]]</td>
                     <td>[[_formatDistance(item.distance)]]</td>
+                    <td>[[_formatDuration(item.duration)]]</td>
                 </tr>
             </template>
-            <tr>
+            <!-- <tr>
                 <td colspan="2">+ 2 MORE RUNNING WORKOUTS</td>
-            </tr>
+            </tr> -->
         </table>
     </template>
     <script>
@@ -89,6 +90,7 @@
 
             properties: {
                 workouts: Array,
+                goals: Array,
                 sport: {
                     type: String,
                     computed: '_computeSport(workouts)'
@@ -96,6 +98,35 @@
                 totalDistance: {
                     type: Number,
                     computed: '_computeTotalDistance(workouts)'
+                },
+                totalDuration: {
+                    type: Number,
+                    computed: '_computeTotalDuration(workouts)'
+                }
+            },
+
+            _getGoal(goals, sport) {
+                var result = goals.filter(function(goal) {
+                    return goal.goal.sport === sport;
+                });
+                if (result.length > 0) {
+                    return result[0];
+                }
+            },
+
+            _goalStatus: function(goals, sport) {
+                var goal = this._getGoal(goals, sport);
+                if (goal) {
+                    var msg = goal.value + '% complete – ';
+                    if (goal.goal.type === 'distance') {
+                        msg += Formatters.distance(goal.left);
+                    } else {
+                        msg += Formatters.duration(goal.left);
+                    }
+                    msg += ' to goal';
+                    return msg;
+                } else {
+                    return 'No goal set';
                 }
             },
 
@@ -107,12 +138,20 @@
                 return Formatters.distance(distance);
             },
 
+            _formatDuration: function(duration) {
+                return Formatters.duration(duration);
+            },
+
             _computeSport: function(workouts) {
                 return workouts[0].sport;
             },
 
             _computeTotalDistance: function(workouts) {
                 return workouts.reduce(function(acc, workout) { return acc += workout.distance; }, 0);
+            },
+
+            _computeTotalDuration: function(workouts) {
+                return workouts.reduce(function(acc, workout) { return acc += workout.duration; }, 0);
             },
 
             _iconUrl: function(sport) {
