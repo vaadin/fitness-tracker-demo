@@ -13,10 +13,11 @@
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
             <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" />
+            <iron-ajax auto url="/data/user.json" handle-as="json" last-response="{{user}}" />
 
-            <neon-animated-pages id="pages" class="flex" style="height: 100%" selected="[[selected]]" attr-for-selected="name">
-                <summary-view week-data="[[weekData]]" name="summary"></summary-view>
-                <workouts-view week-data="[[weekData]]" name="details"></workouts-view>
+            <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
+                <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
+                <workouts-view week-data="[[weekData]]" user="[[user]]" name="details"></workouts-view>
             </neon-animated-pages>
         </template>
 

@@ -1,0 +1,43 @@
+<dom-module id="user-avatar">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            img {
+                width: 42px;
+                height: 42px;
+                border-radius: 4px;
+            }
+            paper-tooltip {
+                --paper-tooltip: {
+                    cursor: default;
+                    white-space: nowrap;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    margin-top: -1em;
+                }
+            }
+        </style>
+        <img id="avatar" src="[[user.avatarUrl]]" />
+        <paper-tooltip for="avatar" id="nameTooltip">[[user.name]]</paper-tooltip>
+    </template>
+    <script>
+        Polymer({
+            is: 'user-avatar',
+
+            properties: {
+                user: Object
+            },
+
+            ready: function() {
+                var animationConfig = this.$.nameTooltip.getAnimationConfig();
+                if (animationConfig[0]) {
+                    // Tweak the animation timing.
+                    animationConfig[0].entry[0].timing.delay = 0;
+                    animationConfig[0].entry[0].timing.duration = 200;
+                }
+            }
+        });
+    </script>
+</dom-module>

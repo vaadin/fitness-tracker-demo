@@ -154,7 +154,7 @@
         </style>
 
         <div class="layout vertical" style="min-height: 100%">
-            <app-toolbar>
+            <app-toolbar user="[[user]]">
                 <span class="h1">Workout details</span>
                 <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
             </app-toolbar>
@@ -227,6 +227,7 @@
                         };
                     }
                 },
+                user: Object,
                 weekData: {
                     type: Object,
                     observer: '_weekDataChanged'
