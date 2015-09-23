@@ -15,9 +15,9 @@
         "maxAlt": 132,
         "ascent": 19
     }, {
-        "sport": "running",
+        "sport": "swimming",
         "date": "2015-09-05T18:25:43.511Z",
-        "distance": 1005,
+        "distance": 800,
         "duration": 3043,
         "weather": "Dry",
         "humidity": 5,
@@ -29,10 +29,10 @@
         "maxAlt": 122,
         "ascent": 19
     }, {
-        "sport": "running",
+        "sport": "tennis",
         "date": "2015-09-03T18:25:43.511Z",
         "distance": 500,
-        "duration": 62,
+        "duration": 75,
         "weather": "Dry",
         "humidity": 5,
         "temperature": 16,
