@@ -322,12 +322,6 @@
 
             _weekDataChanged: function() {
                 this.$.workoutGrid.data.source = this.weekData.workouts;
-            },
-
-            _getWorkoutDetailsHtml: function(workout) {
-                var detailsTemplate = document.getElementById('workout-details');
-                detailsTemplate.workout = workout;
-                return this.$.templateWrapper.querySelector('.workout-details').innerHTML;
             }
         });
     </script>
