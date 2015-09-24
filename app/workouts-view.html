@@ -181,7 +181,7 @@
                         <div class="weather">
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>[[formatTemperature(workout.temperature)]]</div>
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>[[workout.humidity]]</span>%</div>
-                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Sun.png"></iron-icon><strong>Weather</strong>[[workout.weather]]</div>
+                            <div class="cell"><iron-icon class="big" src$="[[_getWeatherIcon(workout.weather)]]"></iron-icon><strong>Weather</strong>[[workout.weather]]</div>
                         </div>
                     </div>
                     <div class="row">
@@ -307,6 +307,16 @@
                     grid.data.getItem(rowIndex, function(err, item) {
                         if (!err) {
                             var detailsTemplate = self.$.workoutDetails;
+                            detailsTemplate._getWeatherIcon = function(weather) {
+                                switch (weather) {
+                                    case 'Dry':
+                                        return 'resources/weather-icons/Sun.png';
+                                    case 'Rain':
+                                        return 'resources/weather-icons/Rain.png';
+                                    default:
+                                        return 'resources/weather-icons/Clouds.png';
+                                }
+                            };
                             detailsTemplate.workout = item;
                             details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
 
