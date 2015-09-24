@@ -12,13 +12,14 @@
     </head>
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
-            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" />
+            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" />
             <iron-ajax auto url="/data/user.json" handle-as="json" last-response="{{user}}" />
 
             <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
                 <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
                 <workouts-view week-data="[[weekData]]" user="[[user]]" name="details"></workouts-view>
             </neon-animated-pages>
+            <paper-toast id="toast"></paper-toast>
         </template>
 
         <script>
@@ -32,10 +33,17 @@
             var app = document.querySelector('#app');
             app.selected = 'summary';
             app.week = 39;
+            app.prevWeek = app.week;
 
             app.dataUrl = function(week) {
                 return 'data/week-' + week + '.json';
-            }
+            };
+
+            app.ajaxError = function(err) {
+                this.$.toast.text = 'Sorry, no data available for week ' + app.week + '.';
+                this.$.toast.show();
+                app.week = app.prevWeek;
+            };
 
             app.addEventListener('dom-change', function() {
                 this.$.pages.addEventListener('neon-animation-finish', function(e) {
@@ -48,9 +56,11 @@
                 app.selected = e.detail;
             });
             document.addEventListener('next-week', function(e) {
+                app.prevWeek = app.week;
                 app.week++;
             });
             document.addEventListener('prev-week', function(e) {
+                app.prevWeek = app.week;
                 app.week--;
             });
 
