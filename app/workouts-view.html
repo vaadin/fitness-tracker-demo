@@ -179,26 +179,26 @@
                             <google-map id="routeMap"></google-map>
                         </div>
                         <div class="weather">
-                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>{{formatTemperature(workout.temperature)}}</div>
-                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>{{workout.humidity}}</span>%</div>
-                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Sun.png"></iron-icon><strong>Weather</strong>{{workout.weather}}</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>[[formatTemperature(workout.temperature)]]</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>[[workout.humidity]]</span>%</div>
+                            <div class="cell"><iron-icon class="big" src="resources/weather-icons/Sun.png"></iron-icon><strong>Weather</strong>[[workout.weather]]</div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="cell"><strong>Calories</strong><span>{{workout.calories}}</span> kcal</div>
-                        <div class="cell"><strong>Avg pace</strong><span>{{formatDuration(workout.avgPace)}}</span> min/km</div>
-                        <div class="cell"><strong>Max pace</strong><span>{{formatDuration(workout.maxPace)}}</span> min/km</div>
+                        <div class="cell"><strong>Calories</strong><span>[[workout.calories]]</span> kcal</div>
+                        <div class="cell"><strong>Avg pace</strong><span>[[formatDuration(workout.avgPace)]]</span> min/km</div>
+                        <div class="cell"><strong>Max pace</strong><span>[[formatDuration(workout.maxPace)]]</span> min/km</div>
                     </div>
                     <div class="row">
-                        <div class="cell"><strong>Min altitude</strong><span>{{workout.minAlt}}</span> m</div>
-                        <div class="cell"><strong>Max altitude</strong><span>{{workout.maxAlt}}</span> m</div>
-                        <div class="cell"><strong>Ascent/descent</strong><span>{{formatAscent(workout.ascent)}}</span> m</div>
+                        <div class="cell"><strong>Min altitude</strong><span>[[workout.minAlt]]</span> m</div>
+                        <div class="cell"><strong>Max altitude</strong><span>[[workout.maxAlt]]</span> m</div>
+                        <div class="cell"><strong>Ascent/descent</strong><span>[[formatAscent(workout.ascent)]]</span> m</div>
                     </div>
                     <div style="height: 250px; margin-top: 20px;">
                         <speed-altitude-chart
-                            speed-data="[8, 9, 8, 8, 10, 11, 12]"
-                            altitude-data="[100, 103, 104, 113, 103, 92, 81]"
-                            labels='["0 km", "2 km", "4 km", "6 km", "8 km", "10 km", "12 km"]'>
+                            speed-data$="[[workout.speedData.speed]]"
+                            altitude-data$="[[workout.speedData.altitude]]"
+                            labels$="[[workout.speedData.labels]]">
                         </speed-altitude-chart>
                     </div>
                 </div>
@@ -311,7 +311,7 @@
                             details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
 
                             details.addEventListener('google-map-ready', function() {
-                                // Test data – Teemu's Ruisrääkki from 2014.
+                                // Sample data – Teemu's Ruisrääkki from 2014.
                                 this.querySelector('#routeMap').kml = 'https://dl.dropboxusercontent.com/u/2502415/vaadin/fitness/activity_594778529.kml';
                             });
                         }
