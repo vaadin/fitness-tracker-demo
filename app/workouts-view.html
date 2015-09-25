@@ -54,41 +54,19 @@
                 width: 100vw;
                 padding: 16px;
                 box-sizing: border-box;
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -webkit-flex-direction: column;
-                -ms-flex-direction: column;
-                flex-direction: column;
+                @apply(--layout-vertical);
                 background: transparent;
                 color: var(--text-primary-color);
             }
             vaadin-grid ::content .workout-details .map-and-weather {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: horizontal;
-                -webkit-box-direction: normal;
-                -webkit-flex-direction: row;
-                -ms-flex-direction: row;
-                flex-direction: row;
+                @apply(--layout-horizontal);
             }
             vaadin-grid ::content .workout-details .map-and-weather > div {
-                -webkit-box-flex: 1;
-                -webkit-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
+                @apply(--layout-flex);
             }
             vaadin-grid ::content .workout-details .map-and-weather .map {
                 height: 200px;
-                -webkit-box-flex: 2;
-                -webkit-flex: 2;
-                -ms-flex: 2;
-                flex: 2;
+                @apply(--layout-flex-2);
             }
             vaadin-grid ::content .workout-details .map-and-weather .weather {
                 display: -webkit-box;
@@ -106,17 +84,11 @@
                 justify-content: space-between;
             }
             vaadin-grid ::content .workout-details .row {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
+                @apply(--layout-horizontal);
             }
             vaadin-grid ::content .workout-details .cell {
                 padding: 20px 0 0 10px;
-                -webkit-box-flex: 1;
-                -webkit-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
+                @apply(--layout-flex);
             }
             vaadin-grid ::content .workout-details .cell strong {
                 font-weight: 100;
@@ -134,33 +106,6 @@
                 display: inline-block;
                 cursor: pointer;
             }
-            /*
-            @media (min-width: 600px) {
-                vaadin-grid ::content .workout-details {
-                    -webkit-box-orient: horizontal;
-                    -webkit-box-direction: normal;
-                    -webkit-flex-direction: row;
-                    -ms-flex-direction: row;
-                    flex-direction: row;
-                    -webkit-box-pack: justify;
-                    -webkit-justify-content: space-between;
-                    -ms-flex-pack: justify;
-                    justify-content: space-between;
-                }
-                vaadin-grid ::content .workout-details .row {
-                    -webkit-box-orient: vertical;
-                    -webkit-box-direction: normal;
-                    -webkit-flex-direction: column;
-                    -ms-flex-direction: column;
-                    flex-direction: column;
-                }
-                vaadin-grid ::content .workout-details .map-and-weather {
-                    -webkit-box-flex: 2;
-                    -webkit-flex: 2;
-                    -ms-flex: 2;
-                    flex: 2;
-                }
-            }*/
         </style>
 
         <div class="layout vertical" style="min-height: 100%">
