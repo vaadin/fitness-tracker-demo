@@ -152,10 +152,14 @@
         },
         _updateContentPosition: function() {
             var angle = 2 * Math.PI * (this.value / this.max) - Math.PI / 2;
-            var x = Math.cos(angle) * this._radius;
-            var y = Math.sin(angle) * this._radius;
-            this.$.content.style.webkitTransform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
-            this.$.content.style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
+            var x = Math.round(Math.cos(angle) * this._radius);
+            var y = Math.round(Math.sin(angle) * this._radius);
+            var transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+            if ('webkitTransform' in this.$.content.style) {
+                this.$.content.style.webkitTransform = transform;
+            } else {
+                this.$.content.style.transform = transform;
+            }
         },
         redraw: function() {
             this._cx = this.clientWidth / 2;
