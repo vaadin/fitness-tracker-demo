@@ -89,7 +89,7 @@
         <button id="next" on-tap="_nextWeek">Next week</button>
         <summary-rings id="summary" summary-rows="[[_goalSummary(weekData)]]" on-tap="_showDetails"></summary-rings>
 
-        <div id="summary-tables">
+        <div id="summary-tables" on-tap="_showDetails">
             <template is="dom-repeat" items="[[_workoutsBySport(weekData)]]">
                 <summary-table workouts="[[item]]" goals="[[_goalSummary(weekData)]]"></summary-table>
             </template>

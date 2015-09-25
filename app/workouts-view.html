@@ -100,18 +100,21 @@
             }
 
             app-toolbar #back-button {
-                background: var(--secondary-color);
-                padding: 5px;
+                padding: 8px 20px;
                 border-radius: 4px;
+                font-size: 16px;
                 display: inline-block;
                 cursor: pointer;
+                background: url("resources/vaadin-icons/chevron-left-edit.svg") 16px center no-repeat;
+                background-color: var(--secondary-color);
+                background-size: 16px;
+                padding-left: 40px;
             }
         </style>
 
         <div class="layout vertical" style="min-height: 100%">
             <app-toolbar user="[[user]]">
-                <span class="h1">Workout details</span>
-                <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
+                <div class="h1" id="back-button" on-tap="_navigateBack">Back to summary</div>
             </app-toolbar>
             <vaadin-grid class="flex" frozen-columns="1" selection-mode="disabled" id="workoutGrid">
                 <table>
