@@ -107,12 +107,11 @@
                 }
             },
 
-            _getGoal(goals, sport) {
-                var result = goals.filter(function(goal) {
-                    return goal.goal.sport === sport;
-                });
-                if (result.length > 0) {
-                    return result[0];
+            _getGoal: function(goals, sport) {
+                for (var i = 0; i < goals.length; i++) {
+                    if (goals[i].goal.sport === sport) {
+                        return goals[i];
+                    }
                 }
             },
 
