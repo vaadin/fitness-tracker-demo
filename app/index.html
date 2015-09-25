@@ -3,12 +3,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
+        <title>Fitness Tracker</title>
         <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
         <script src="bower_components/moment/min/moment.min.js"></script>
         <script src="js/formatters.js"></script>
         <link rel="import" href="elements.html" />
         <style is="custom-style" include="app-theme"></style>
+
+        <!-- Chrome -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="resources/app-icon-192x192.png" />
+
+        <!-- iOS -->
+        <link rel="apple-touch-icon" href="resources/app-icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
     </head>
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
