@@ -1,4 +1,9 @@
 var gulp = require('gulp');
+var polybuild = require('polybuild');
+var rename = require('gulp-rename');
+var merge = require('merge-stream');
+var del = require('del');
+var runSequence = require('run-sequence');
 var browserSync = require('browser-sync').create();
 
 gulp.task('serve', function() {
@@ -14,4 +19,35 @@ gulp.task('serve', function() {
     gulp.watch('app/*', browserSync.reload);
 });
 
+gulp.task('copy-files', function() {
+    var app = gulp.src([
+        'app/**/*'
+    ]).pipe(gulp.dest('dist'));
+
+    var bower = gulp.src([
+        'bower_components/**/*'
+    ]).pipe(gulp.dest('dist/bower_components'));
+
+    return merge(app, bower);
+});
+
+gulp.task('polybuild', function() {
+    return gulp.src('dist/index.html')
+        .pipe(polybuild({ maximumCrush: true }))
+        .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('rename-files', function() {
+    return gulp.src('dist/index.build.html')
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('clean', function() {
+    return del('dist');
+});
+
+gulp.task('dist', ['clean'], function(callback) {
+    runSequence('copy-files', 'polybuild', 'rename-files', callback);
+});
 gulp.task('default', ['serve']);
