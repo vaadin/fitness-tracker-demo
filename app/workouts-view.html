@@ -35,6 +35,16 @@
             }
             vaadin-grid ::content .toggle-details {
                 cursor: pointer;
+                background: url(resources/vaadin-icons/arrow-circle-down-o-edit.svg) center center no-repeat;
+                width: 48px;
+                height: 48px;
+                background-size: 18px 18px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            vaadin-grid ::content .toggle-details.open {
+                transform: rotate(180deg);
             }
             vaadin-grid ::content .vaadin-grid-row:after {
                 background: transparent;
@@ -287,7 +297,7 @@
                                 grid.setRowDetailsVisible(rowIndex, false);
                             }
                         });
-                        toggle.innerHTML = (visibleRowDetails.indexOf(rowIndex) === -1 ? '&#9654;' : '&#9660;');
+                        (visibleRowDetails.indexOf(rowIndex) === -1 ? toggle.classList.remove('open') : toggle.classList.add('open'));
                         if (cell.element.firstChild) {
                             cell.element.removeChild(cell.element.firstChild);
                         }
