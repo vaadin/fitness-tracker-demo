@@ -5,7 +5,6 @@
         <style>
             :host {
                 display: block;
-                margin: 30px 0;
             }
             #head {
                 color: #fff;
@@ -65,6 +64,30 @@
                 text-align: center;
                 font-size: 35px;
                 font-weight: 100;
+            }
+            @media (min-width: 840px) {
+                table {
+                    padding-left: 100px;
+                }
+                #head {
+                    margin-left: 100px;
+                }
+                #sport,
+                #status {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+                #sport::after {
+                    display: none;
+                }
+                #status {
+                    background: #00bfa5;
+                    text-align: left;
+                    margin-left: 0;
+                }
+                iron-icon {
+                    margin-top: 65px;
+                }
             }
         </style>
         <iron-icon src="[[_iconUrl(sport)]]" class="huge"></iron-icon>

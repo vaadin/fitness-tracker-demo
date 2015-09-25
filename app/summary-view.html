@@ -56,6 +56,25 @@
                 position: relative;
                 z-index: 9;
             }
+            @media (max-width: 839px) {
+                #summary-tables {
+                    @apply(--layout-vertical);
+                }
+                #summary-tables summary-table {
+                    margin: 10px 0 20px 0;
+                }
+            }
+            @media (min-width: 840px) {
+                #summary-tables {
+                    @apply(--layout-horizontal);
+                    @apply(--layout-wrap);
+                }
+                #summary-tables summary-table {
+                    width: 50%;
+                    padding: 10px 20px;
+                    box-sizing: border-box;
+                }
+            }
         </style>
         <app-toolbar user="[[user]]">
             <span class="h1">Workouts</span>
