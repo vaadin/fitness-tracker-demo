@@ -5,6 +5,7 @@ var merge = require('merge-stream');
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync').create();
+var manifest = require('gulp-appcache');
 
 gulp.task('serve', function() {
     browserSync.init({
@@ -47,7 +48,17 @@ gulp.task('clean', function() {
     return del('dist');
 });
 
+gulp.task('appcache', function() {
+    return gulp.src(['dist/**/*'])
+        .pipe(manifest({
+            hash: true,
+            filename: 'manifest.appcache',
+            network: ['*']
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('dist', ['clean'], function(callback) {
-    runSequence('copy-files', 'polybuild', 'rename-files', callback);
+    runSequence('copy-files', 'polybuild', 'rename-files', 'appcache', callback);
 });
 gulp.task('default', ['serve']);

@@ -7,6 +7,7 @@
     "browser-sync": "^2.9.1",
     "del": "^2.0.2",
     "gulp": "^3.9.0",
+    "gulp-appcache": "0.0.4",
     "gulp-rename": "^1.2.2",
     "merge-stream": "^1.0.0",
     "run-sequence": "^1.1.4"
