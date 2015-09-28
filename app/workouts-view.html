@@ -33,6 +33,9 @@
             vaadin-grid ::content td.last-frozen {
                 border: none !important;
             }
+            vaadin-grid ::content td:nth-child(2) {
+                padding: 0 !important;
+            }
             vaadin-grid ::content .toggle-details {
                 cursor: pointer;
                 background: url(resources/vaadin-icons/arrow-circle-down-o-edit.svg) center center no-repeat;
@@ -51,7 +54,6 @@
             }
             vaadin-grid ::content .sport-icon {
                 width: 25px;
-                height: 25px;
             }
 
             vaadin-grid ::content .workout-details {
@@ -125,7 +127,7 @@
                 <table>
                     <colgroup>
                         <col width="20" />
-                        <col width="64" name="sport" header-text="" sortable />
+                        <col width="25" name="sport" header-text="" sortable />
                         <col name="date" header-text="DATE" sortable />
                         <col name="distance" header-text="DISTANCE" sortable />
                         <col name="duration" header-text="TIME" sortable />
