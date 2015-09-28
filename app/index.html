@@ -21,8 +21,8 @@
     </head>
     <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
-            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" />
-            <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}" />
+            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
+            <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
 
             <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
                 <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
