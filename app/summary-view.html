@@ -6,15 +6,6 @@
             :host {
                 display: block;
             }
-            .h2 span {
-                background: var(--text-primary-color);
-                color: #fff;
-                border-radius: 50%;
-                width: 1.8em;
-                height: 1.8em;
-                line-height: 1.8em;
-                display: inline-block;
-            }
             #prev,
             #next {
                 outline: none;
@@ -68,7 +59,7 @@
         </style>
         <app-toolbar user="[[user]]">
             <span class="h1">Summary</span>
-            <span class="h2">Selected week <span>[[weekData.weekNumber]]</span></span>
+            <span class="h2">Selected week <span class="circle">[[weekData.weekNumber]]</span></span>
             <span class="details">
                 <span>[[_weekStartDate(weekData.weekNumber)]]</span>
                 &ndash;

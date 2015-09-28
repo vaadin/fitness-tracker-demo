@@ -108,7 +108,6 @@
             app-toolbar #back-button {
                 padding: 8px 20px;
                 border-radius: 4px;
-                font-size: 16px;
                 display: inline-block;
                 cursor: pointer;
                 background: url("resources/vaadin-icons/chevron-left-edit.svg") 16px center no-repeat;
@@ -116,11 +115,32 @@
                 background-size: 16px;
                 padding-left: 40px;
             }
+
+            .h1 span {
+                font-size: 60%;
+                position: relative;
+                top: -2px;
+            }
+            .h1 span::before {
+                content: "w";
+                font-weight: bold;
+                font-size: 45%;
+                position: absolute;
+                display: block;
+                top: -2px;
+                left: -3px;
+                z-index: 5;
+                background: #004d40;
+                height: 2em;
+                width: 2em;
+                line-height: 2em;
+                border-radius: 50%;
+            }
         </style>
 
         <div class="layout vertical" style="min-height: 100%">
             <app-toolbar user="[[user]]">
-                <div class="h1">Workouts</div>
+                <div class="h1">All Workouts <span class="circle">[[weekData.weekNumber]]</div>
                 <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
             </app-toolbar>
             <vaadin-grid class="flex" frozen-columns="1" selection-mode="disabled" id="workoutGrid">

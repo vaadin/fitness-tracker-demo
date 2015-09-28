@@ -3,29 +3,48 @@
         <style>
             :host {
                 display: block;
+                font-size: 18px;
+            }
+            h1,
+            h2,
+            .details {
+                padding: 0;
+                margin: 0;
+                text-align: center;
             }
             h1 {
-                font-size: 28px;
+                font-size: 150%;
                 font-weight: 100;
                 color: black !important;
                 text-transform: uppercase;
-                text-align: center;
+            }
+            h2 {
+                font-weight: normal;
+                font-size: 80%;
+            }
+            .details {
+                font-size: 85%;
             }
             paper-toolbar .top {
                 margin-top: 20px;
+            }
+            @media (max-width: 480px) {
+                :host {
+                    font-size: 14px;
+                }
             }
         </style>
         <paper-toolbar class="medium-tall">
             <div class="flex top layout horizontal center">
                 <app-logo></app-logo>
                 <div class="flex">
-                    <h1 style="padding: 0; margin: 0"><content select=".h1"></content></h1>
-                    <h2 style="padding: 0; margin: 0; text-align: center; font-weight: normal; font-size: 14px"><content select=".h2"></content></h2>
+                    <h1><content select=".h1"></content></h1>
+                    <h2><content select=".h2"></content></h2>
                 </div>
                 <user-avatar user="[[user]]"></user-avatar>
             </div>
             <div class="flex bottom">
-                <div style="text-align: center"><content select=".details"></content></div>
+                <div class="details"><content select=".details"></content></div>
             </div>
         </paper-toolbar>
     </template>
