@@ -49,6 +49,10 @@
             vaadin-grid ::content .vaadin-grid-row:after {
                 background: transparent;
             }
+            vaadin-grid ::content .sport-icon {
+                width: 25px;
+                height: 25px;
+            }
 
             vaadin-grid ::content .workout-details {
                 width: 100vw;
@@ -114,12 +118,14 @@
 
         <div class="layout vertical" style="min-height: 100%">
             <app-toolbar user="[[user]]">
-                <div class="h1" id="back-button" on-tap="_navigateBack">Back to summary</div>
+                <div class="h1">Workouts</div>
+                <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
             </app-toolbar>
             <vaadin-grid class="flex" frozen-columns="1" selection-mode="disabled" id="workoutGrid">
                 <table>
                     <colgroup>
                         <col width="20" />
+                        <col width="64" name="sport" header-text="" sortable />
                         <col name="date" header-text="DATE" sortable />
                         <col name="distance" header-text="DISTANCE" sortable />
                         <col name="duration" header-text="TIME" sortable />
@@ -233,6 +239,9 @@
                     pace: function(cell) {
                         cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
                     },
+                    sport: function(cell) {
+                        cell.element.innerHTML = '<img class="sport-icon" src="resources/sport-icons/' + cell.data + '/' + cell.data + '-50.png" />';
+                    },
                     toggle: function(cell) {
                         var toggle = document.createElement('div');
                         toggle.classList.add('toggle-details');
@@ -254,11 +263,12 @@
                     }
                 }
                 grid.columns[0].renderer = renderers.toggle;
-                grid.columns[1].renderer = renderers.date;
-                grid.columns[2].renderer = renderers.distance;
-                grid.columns[3].renderer = renderers.duration;
-                grid.columns[4].renderer = renderers.calories;
-                grid.columns[5].renderer = renderers.pace;
+                grid.columns[1].renderer = renderers.sport;
+                grid.columns[2].renderer = renderers.date;
+                grid.columns[3].renderer = renderers.distance;
+                grid.columns[4].renderer = renderers.duration;
+                grid.columns[5].renderer = renderers.calories;
+                grid.columns[6].renderer = renderers.pace;
 
                 grid.rowDetailsGenerator = function(rowIndex) {
                     var details = document.createElement('div');
