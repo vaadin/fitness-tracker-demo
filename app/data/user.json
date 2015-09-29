@@ -12,6 +12,6 @@
     }, {
         "sport": "tennis",
         "type": "duration",
-        "goal": 120
+        "goal": 3600
     }]
 }
