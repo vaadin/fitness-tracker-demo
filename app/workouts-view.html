@@ -180,7 +180,7 @@
                         <div class="cell"><strong>Max altitude</strong><span>[[workout.maxAlt]]</span> m</div>
                         <div class="cell"><strong>Ascent/descent</strong><span>[[formatAscent(workout.ascent)]]</span> m</div>
                     </div>
-                    <div style="height: 250px; margin-top: 20px;">
+                    <div style="height: 250px; margin-top: 20px;" hidden$="[[!workout.speedData]]">
                         <speed-altitude-chart
                             speed-data$="[[workout.speedData.speed]]"
                             altitude-data$="[[workout.speedData.altitude]]"
