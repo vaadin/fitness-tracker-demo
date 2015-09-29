@@ -2,7 +2,7 @@ Fitness Tracker Demo
 ====================
 
 Fitness Tracker Demo is a Polymer-based client-side demo application, which
-uses elements from the [Polymer Catalog](https://elements.polymer-project.org/), [Vaadin Grid](http://vaadin.com/components) and [Vaadin Charts](http://vaadin.com/charts).
+uses elements from the [Polymer Catalog](https://elements.polymer-project.org/), [Vaadin Grid](http://vaadin.com/components) and [Vaadin Charts](http://vaadin.com/charts). Icons used in this demo are provided by [Icons8](https://icons8.com/).
 
 ![](screenshot.png)
 
