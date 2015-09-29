@@ -113,7 +113,7 @@
                     return {
                         goal: goal,
                         value: achieved,
-                        left: goal.goal - total
+                        left: Math.max(0, goal.goal - total)
                     };
                 });
             },
@@ -166,7 +166,6 @@
                 this.fire('prev-week');
             },
             _getTotal: function(summaryRows) {
-                console.log('total');
                 return summaryRows[0].value + '%';
             },
             _showDetails: function() {

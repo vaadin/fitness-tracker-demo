@@ -71,7 +71,7 @@
         </style>
         <div class="progress-circles">
             <template is="dom-repeat" items="[[summaryRows]]">
-                <progress-bubble stroke-width="35" max="100" value="[[item.value]]">
+                <progress-bubble stroke-width="35" max="100" value="[[_limit(item.value)]]">
                     <iron-icon src="[[_iconUrl(item.goal.sport)]]"></iron-icon>
                     <span>[[item.value]]</span>%
                 </progress-bubble>
@@ -89,6 +89,10 @@
 
             properties: {
                 summaryRows: Array
+            },
+
+            _limit: function(value) {
+                return Math.min(100, value);
             },
 
             _iconUrl: function(sport) {
