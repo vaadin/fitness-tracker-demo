@@ -6,6 +6,14 @@ uses elements from the [Polymer Catalog](https://elements.polymer-project.org/),
 
 ![](screenshot.png)
 
+Backend
+-------
+
+The client-side application uses static JSON files as its "backend". These files are located
+in ```app/data``` directory. In the same directory you will also find a Node script
+that can be used to generate more example data. It could also be easily modified
+to a Node-based REST API.
+
 Development
 -----------
 
