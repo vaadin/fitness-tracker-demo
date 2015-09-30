@@ -50,7 +50,10 @@
                 background: #eff8f8;
             }
             table td {
-                padding: 15px;
+                padding: 15px 20px;
+            }
+            table td.right {
+                text-align: right;
             }
             iron-icon {
                 float: left;
@@ -91,7 +94,14 @@
             }
         </style>
         <iron-icon src="[[_iconUrl(sport)]]" class="huge"></iron-icon>
-        <h2><span>[[_formatDistance(totalDistance)]]</span> / <span>[[_formatDuration(totalDuration)]]</span></h2>
+        <h2>
+            <template is="dom-if" if="[[isDistanceSport]]">
+                <span>[[_formatDistance(totalDistance)]]</span>
+            </template>
+            <template is="dom-if" if="[[!isDistanceSport]]">
+                <span>[[_formatDuration(totalDuration)]]</span>
+            </template>
+        </h2>
         <div id="head">
             <span id="sport">[[sport]]</span>
             <span id="status">[[_goalStatus(goals, sport)]]</span>
@@ -100,8 +110,12 @@
             <template is="dom-repeat" items="[[workouts]]">
                 <tr>
                     <td>[[_formatDate(item.date)]]</td>
-                    <td>[[_formatDistance(item.distance)]]</td>
-                    <td>[[_formatDuration(item.duration)]]</td>
+                    <template is="dom-if" if="[[isDistanceSport]]">
+                        <td class="right">[[_formatDistance(item.distance)]]</td>
+                    </template>
+                    <template is="dom-if" if="[[!isDistanceSport]]">
+                        <td class="right">[[_formatDuration(item.duration)]]</td>
+                    </template>
                 </tr>
             </template>
             <!-- <tr>
@@ -127,6 +141,10 @@
                 totalDuration: {
                     type: Number,
                     computed: '_computeTotalDuration(workouts)'
+                },
+                isDistanceSport: {
+                    type: Boolean,
+                    computed: '_computeDistanceSport(goals, sport)'
                 }
             },
 
@@ -168,6 +186,15 @@
 
             _computeSport: function(workouts) {
                 return workouts[0].sport;
+            },
+
+            _computeDistanceSport: function(goals, sport) {
+                var goal = this._getGoal(goals, sport);
+                if (goal) {
+                    return goal.goal.type === 'distance';
+                } else {
+                    return false;
+                }
             },
 
             _computeTotalDistance: function(workouts) {
