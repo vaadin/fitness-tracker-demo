@@ -19,19 +19,28 @@
                 font-weight: bold;
                 margin: 8px;
                 position: relative;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
                 z-index: 10;
-                transition: all 400ms;
             }
             #prev {
+                float: left;
                 background: url("resources/vaadin-icons/chevron-left-edit.svg") center left no-repeat;
                 background-size: 18px;
-                padding-left: 20px;
+                padding: 5px 5px 5px 20px;
             }
             #next {
                 float: right;
                 background: url("resources/vaadin-icons/chevron-right-edit.svg") center right no-repeat;
                 background-size: 18px;
-                padding-right: 20px;
+                padding: 5px 20px 5px 5px;
+            }
+            #controls::after {
+                content: "";
+                display: block;
+                clear: both;
             }
             summary-rings {
                 position: relative;
@@ -66,8 +75,10 @@
                 <span>[[_weekEndDate(weekData.weekNumber)]]</span>
             </span>
         </app-toolbar>
-        <button id="prev" on-tap="_prevWeek">Previous week</button>
-        <button id="next" on-tap="_nextWeek">Next week</button>
+        <div id="controls">
+            <div id="prev" on-tap="_prevWeek">Previous week</div>
+            <div id="next" on-tap="_nextWeek">Next week</div>
+        </div>
         <summary-rings id="summary" summary-rows="[[_goalSummary(weekData)]]" on-tap="_showDetails"></summary-rings>
 
         <div id="summary-tables" on-tap="_showDetails">
