@@ -176,9 +176,11 @@
 
             // Keep the content invisible before first calculation is done.
             this.classList.add('calculation-ready');
+            this.classList.remove('animation-off');
         },
         attached: function() {
             // Must use this.async in order to have clientWidth/clientHeight available.
+            this.classList.add('animation-off');
             this.async(this.redraw, 100);
         },
         attributeChanged: function() {

@@ -91,15 +91,6 @@
                 summaryRows: Array
             },
 
-            ready: function() {
-                this.async(function() {
-                    var bubbles = document.querySelectorAll('progress-bubble');
-                    for (var i = 0; i < bubbles.length; i++) {
-                        bubbles[i].classList.remove('animation-off');
-                    }
-                }, 1000);
-            },
-
             _limit: function(value) {
                 return Math.min(100, value);
             },
