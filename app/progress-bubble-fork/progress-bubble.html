@@ -43,6 +43,9 @@
             position: relative;
             transition: all var(--progress-bubble-transition-duration, 150ms);
         }
+        :host(.animation-off) #content {
+            transition: none;
+        }
         #content span {
             background: rgba(255, 255, 255, 0.6);
             padding: 2px;
@@ -72,6 +75,9 @@
         #svgCircle {
             transition: stroke-dashoffset var(--progress-bubble-transition-duration, 150ms) ease-out;
             /*stroke: var(--progress-bubble-stroke-color, rgba(0, 240, 45, 0.8));*/
+        }
+        :host(.animation-off) #svgCircle {
+            transition: none;
         }
     </style>
     <template>

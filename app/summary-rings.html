@@ -71,7 +71,7 @@
         </style>
         <div class="progress-circles">
             <template is="dom-repeat" items="[[summaryRows]]">
-                <progress-bubble stroke-width="35" max="100" value="[[_limit(item.value)]]">
+                <progress-bubble class="animation-off" stroke-width="35" max="100" value="[[_limit(item.value)]]">
                     <iron-icon src="[[_iconUrl(item.goal.sport)]]"></iron-icon>
                     <span>[[item.value]]</span>%
                 </progress-bubble>
@@ -89,6 +89,15 @@
 
             properties: {
                 summaryRows: Array
+            },
+
+            ready: function() {
+                this.async(function() {
+                    var bubbles = document.querySelectorAll('progress-bubble');
+                    for (var i = 0; i < bubbles.length; i++) {
+                        bubbles[i].classList.remove('animation-off');
+                    }
+                }, 1000);
             },
 
             _limit: function(value) {
