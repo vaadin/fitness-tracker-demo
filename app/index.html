@@ -23,6 +23,18 @@
         <template is="dom-bind" id="app">
             <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
             <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
+            <paper-dialog id="about" modal>
+                <iron-icon class="big" src="resources/app-icon-192x192.png"></iron-icon>
+                <h1>Fitness Tracker</h1>
+                <p>
+                    This is a demo application built with <a href="https://elements.polymer-project.org/">Polymer Elements</a>,
+                    <a href="https://vaadin.com/components">Vaadin Components</a> and <a href="https://vaadin.com/charts">Vaadin Charts</a>.
+                </p>
+                <p>
+                    Fork the project on <a href="https://github.com/tehapo/fitness-tracker-demo">GitHub</a>.
+                </p>
+                <button dialog-confirm autofocus>OK</button>
+            </paper-dialog>
 
             <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
                 <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
@@ -63,6 +75,9 @@
             });
             document.addEventListener('navigate', function(e) {
                 app.selected = e.detail;
+            });
+            document.addEventListener('about', function(e) {
+                app.$.about.open();
             });
             document.addEventListener('next-week', function(e) {
                 app.prevWeek = app.week;
