@@ -24,16 +24,6 @@
         :host(.calculation-ready) div {
             opacity: 1;
         }
-        #reflection {
-            width: 25%;
-            height: 25%;
-            background: url("reflection.svg") top left no-repeat;
-            display: var(--progress-bubble-reflection-display, block);
-            position: absolute;
-            top: 14%;
-            left: 15%;
-            background-size: contain;
-        }
         #content {
             width: 100%;
             height: 100%;
@@ -98,7 +88,6 @@
                 stroke-linecap="butt"
                 transform$="[[_transform]]" />
         </svg>
-        <div id="reflection"></div>
         <div id="icon"><content select="iron-icon"></content></div>
         <div id="content"><span><content></content></span></div>
     </template>
