@@ -11,60 +11,65 @@
                 color: #00bfa5;
                 font-weight: 500;
             }
-            vaadin-grid ::content thead.vaadin-grid-header {
+            vaadin-grid ::content thead.vaadin-grid-header,
+            vaadin-grid /deep/ thead.vaadin-grid-header {
                 box-shadow: none;
             }
-            vaadin-grid ::content tr td {
+            vaadin-grid ::content tr td,
+            vaadin-grid /deep/ tr td {
                 border-bottom: none !important;
             }
-            vaadin-grid ::content tr:hover td {
+            vaadin-grid ::content tr:hover td,
+            vaadin-grid /deep/ tr:hover td {
                 background: #d6eaea !important;
             }
-            vaadin-grid ::content tr.vaadin-grid-row td {
+            vaadin-grid ::content tr.vaadin-grid-row td,
+            vaadin-grid /deep/ tr.vaadin-grid-row td {
                 background: #eff8f8;
             }
-            vaadin-grid ::content tr.vaadin-grid-row-stripe td {
+            vaadin-grid ::content tr.vaadin-grid-row-stripe td,
+            vaadin-grid /deep/ tr.vaadin-grid-row-stripe td {
                 background: #fff;
             }
-            vaadin-grid ::content th {
+            vaadin-grid ::content th,
+            vaadin-grid /deep/ th {
                 color: #004d40;
             }
             vaadin-grid ::content th.last-frozen,
-            vaadin-grid ::content td.last-frozen {
+            vaadin-grid /deep/ th.last-frozen,
+            vaadin-grid ::content td.last-frozen,
+            vaadin-grid /deep/ td.last-frozen {
                 border-color: rgba(199, 238, 233, 0.8) !important;
             }
             vaadin-grid ::content th:first-child,
-            vaadin-grid ::content td:first-child {
+            vaadin-grid /deep/ th:first-child,
+            vaadin-grid ::content td:first-child,
+            vaadin-grid /deep/ td:first-child {
                 padding: 0 12px !important;
             }
             vaadin-grid ::content .distance,
+            vaadin-grid /deep/ .distance,
             vaadin-grid ::content .duration,
+            vaadin-grid /deep/ .duration,
             vaadin-grid ::content .avgPace,
+            vaadin-grid /deep/ .avgPace,
             vaadin-grid ::content .maxPace,
-            vaadin-grid ::content .calories {
+            vaadin-grid /deep/ .maxPace,
+            vaadin-grid ::content .calories,
+            vaadin-grid /deep/ .calories {
                 @apply(--layout-end-justified);
             }
-            vaadin-grid ::content .toggle-details {
-                cursor: pointer;
-                background: url(resources/vaadin-icons/arrow-circle-down-o-edit.svg) center center no-repeat;
-                width: 48px;
-                height: 48px;
-                background-size: 18px 18px;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            vaadin-grid ::content .toggle-details.open {
-                transform: rotate(180deg);
-            }
-            vaadin-grid ::content .vaadin-grid-row:after {
+            vaadin-grid ::content .vaadin-grid-row:after,
+            vaadin-grid /deep/ .vaadin-grid-row:after {
                 background: transparent;
             }
-            vaadin-grid ::content .sport-icon {
+            vaadin-grid ::content .sport-icon,
+            vaadin-grid /deep/ .sport-icon {
                 width: 25px;
             }
 
-            vaadin-grid ::content .workout-details {
+            vaadin-grid ::content .workout-details,
+            vaadin-grid /deep/ .workout-details {
                 width: 100vw;
                 padding: 16px;
                 box-sizing: border-box;
@@ -72,17 +77,21 @@
                 background: transparent;
                 color: var(--text-primary-color);
             }
-            vaadin-grid ::content .workout-details .map-and-weather {
+            vaadin-grid ::content .workout-details .map-and-weather,
+            vaadin-grid /deep/ .workout-details .map-and-weather {
                 @apply(--layout-horizontal);
             }
-            vaadin-grid ::content .workout-details .map-and-weather > div {
+            vaadin-grid ::content .workout-details .map-and-weather > div,
+            vaadin-grid /deep/ .workout-details .map-and-weather > div {
                 @apply(--layout-flex);
             }
-            vaadin-grid ::content .workout-details .map-and-weather .map {
+            vaadin-grid ::content .workout-details .map-and-weather .map,
+            vaadin-grid /deep/ .workout-details .map-and-weather .map {
                 height: 200px;
                 @apply(--layout-flex-2);
             }
-            vaadin-grid ::content .workout-details .map-and-weather .weather {
+            vaadin-grid ::content .workout-details .map-and-weather .weather,
+            vaadin-grid /deep/ .workout-details .map-and-weather .weather {
                 display: -webkit-box;
                 display: -webkit-flex;
                 display: -ms-flexbox;
@@ -97,18 +106,22 @@
                 -ms-flex-pack: justify;
                 justify-content: space-between;
             }
-            vaadin-grid ::content .workout-details .row {
+            vaadin-grid ::content .workout-details .row,
+            vaadin-grid /deep/ .workout-details .row {
                 @apply(--layout-horizontal);
             }
-            vaadin-grid ::content .workout-details .cell {
+            vaadin-grid ::content .workout-details .cell,
+            vaadin-grid /deep/ .workout-details .cell {
                 padding: 20px 0 0 10px;
                 @apply(--layout-flex);
             }
-            vaadin-grid ::content .workout-details .cell strong {
+            vaadin-grid ::content .workout-details .cell strong,
+            vaadin-grid /deep/ .workout-details .cell strong {
                 font-weight: 100;
                 display: block;
             }
-            vaadin-grid ::content .workout-details iron-icon {
+            vaadin-grid ::content .workout-details iron-icon,
+            vaadin-grid /deep/ .workout-details iron-icon {
                 float: left;
                 margin-right: 8px;
             }
