@@ -52,6 +52,16 @@ gulp.task('del-unnecessary', function() {
     // Delete files and directories no longer needed after polybuild.
     return del([
         'dist/index.build.html',
+        'dist/app-logo.html',
+        'dist/app-theme.html',
+        'dist/app-toolbar.html',
+        'dist/elements.html',
+        'dist/speed-altitude-chart.html',
+        'dist/summary-rings.html',
+        'dist/summary-table.html',
+        'dist/summary-view.html',
+        'dist/user-avatar.html',
+        'dist/workouts-view.html',
         'dist/js',
         'dist/bower_components',
         'dist/progress-bubble-fork'
@@ -63,6 +73,7 @@ gulp.task('appcache', function() {
         .pipe(manifest({
             hash: true,
             filename: 'manifest.appcache',
+            exclude: 'manifest.appcache',
             network: ['*']
         }))
         .pipe(gulp.dest('dist'));
