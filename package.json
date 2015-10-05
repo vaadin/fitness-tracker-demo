@@ -9,10 +9,8 @@
     "gulp": "^3.9.0",
     "gulp-appcache": "0.0.4",
     "gulp-rename": "^1.2.2",
+    "gulp-vulcanize": "^6.0.1",
     "merge-stream": "^1.0.0",
     "run-sequence": "^1.1.4"
-  },
-  "dependencies": {
-    "polybuild": "^1.0.5"
   }
 }

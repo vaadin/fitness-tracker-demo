@@ -1,0 +1,105 @@
+<dom-module id="fitness-tracker">
+    <template>
+        <style>
+            #about iron-icon {
+                float: left;
+                padding-right: 8px;
+            }
+            #about h1 {
+                color: var(--text-primary-color);
+                font-size: 22px;
+                line-height: 22px;
+                white-space: nowrap;
+                margin-top: 30px;
+            }
+            #about a,
+            #about a:hover,
+            #about a:visited,
+            #about button {
+                text-decoration: none;
+                color: var(--text-primary-color);
+                font-weight: bold;
+            }
+            #about button {
+                width: 100%;
+                font-size: 18px;
+                border: none !important;
+                outline: none !important;
+                background: transparent;
+            }
+        </style>
+
+        <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
+        <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
+        <paper-dialog id="about" modal>
+            <iron-icon class="big" src="resources/app-icon-192x192.png"></iron-icon>
+            <h1>Fitness Tracker</h1>
+            <p>
+                This is a demo application built with <a href="https://elements.polymer-project.org/">Polymer Elements</a>,
+                <a href="https://vaadin.com/components">Vaadin Components</a> and <a href="https://vaadin.com/charts">Vaadin Charts</a>.
+            </p>
+            <p>
+                Fork the project on <a href="https://github.com/tehapo/fitness-tracker-demo">GitHub</a>.
+            </p>
+            <button dialog-confirm autofocus>OK</button>
+        </paper-dialog>
+
+        <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
+            <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
+            <workouts-view week-data="[[weekData]]" user="[[user]]" name="details"></workouts-view>
+        </neon-animated-pages>
+        <paper-toast id="toast"></paper-toast>
+    </template>
+    <script>
+        Polymer({
+            is: 'fitness-tracker',
+
+            properties: {
+                selected: {
+                    type: String,
+                    value: 'summary'
+                },
+                week: {
+                    type: Number,
+                    value: 40
+                },
+                prevWeek: {
+                    type: Number,
+                    value: 40
+                }
+            },
+
+            dataUrl: function(week) {
+                return 'data/week-' + week + '.json';
+            },
+
+            ajaxError: function(err) {
+                this.$.toast.text = 'Sorry, no data available for week ' + this.week + '.';
+                this.$.toast.show();
+                this.week = this.prevWeek;
+            },
+
+            ready: function() {
+                this.$.pages.addEventListener('neon-animation-finish', function(e) {
+                    if (e.detail.toPage.pageTransitionFinished) {
+                        e.detail.toPage.pageTransitionFinished();
+                    }
+                });
+                this.addEventListener('navigate', function(e) {
+                    this.selected = e.detail;
+                });
+                this.addEventListener('about', function(e) {
+                    this.$.about.open();
+                });
+                this.addEventListener('next-week', function(e) {
+                    this.prevWeek = this.week;
+                    this.week++;
+                });
+                this.addEventListener('prev-week', function(e) {
+                    this.prevWeek = this.week;
+                    this.week--;
+                });
+            }
+        });
+    </script>
+</dom-module>

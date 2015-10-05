@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var polybuild = require('polybuild');
+var vulcanize = require('gulp-vulcanize');
 var rename = require('gulp-rename');
 var merge = require('merge-stream');
 var del = require('del');
@@ -38,10 +38,14 @@ gulp.task('polybuild', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('rename-files', function() {
-    return gulp.src('dist/index.build.html')
-        .pipe(rename('index.html'))
-        .pipe(gulp.dest('dist/'));
+gulp.task('vulcanize', function() {
+    return gulp.src('dist/elements.html')
+        .pipe(vulcanize({
+            inlineScripts: true,
+            inlineCss: true,
+            stripComments: true
+        }))
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('clean', function() {
@@ -49,21 +53,23 @@ gulp.task('clean', function() {
 });
 
 gulp.task('del-unnecessary', function() {
-    // Delete files and directories no longer needed after polybuild.
+    // Delete files and directories no longer needed after vulcanize.
+    // Note that moment and webcomponentjs must be preserved.
     return del([
-        'dist/index.build.html',
+        'dist/elements.build.html',
         'dist/app-logo.html',
         'dist/app-theme.html',
         'dist/app-toolbar.html',
-        'dist/elements.html',
         'dist/speed-altitude-chart.html',
         'dist/summary-rings.html',
         'dist/summary-table.html',
         'dist/summary-view.html',
         'dist/user-avatar.html',
         'dist/workouts-view.html',
-        'dist/js',
-        'dist/bower_components',
+        'dist/bower_components/**',
+        '!dist/bower_components',
+        '!dist/bower_components/moment/**',
+        '!dist/bower_components/webcomponentsjs/**',
         'dist/progress-bubble-fork'
     ]);
 });
@@ -80,6 +86,6 @@ gulp.task('appcache', function() {
 });
 
 gulp.task('dist', ['clean'], function(callback) {
-    runSequence('copy-files', 'polybuild', 'rename-files', 'del-unnecessary', 'appcache', callback);
+    runSequence('copy-files', 'vulcanize', 'del-unnecessary', 'appcache', callback);
 });
 gulp.task('default', ['serve']);

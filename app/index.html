@@ -4,11 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Fitness Tracker</title>
-        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
         <script src="bower_components/moment/min/moment.min.js"></script>
         <script src="js/formatters.js"></script>
-        <link rel="import" href="elements.html" />
-        <style is="custom-style" include="app-theme"></style>
+        <link rel="import" id="bundle" href="elements.html" async />
+        <style>
+            body.loading {
+                width: 100vw;
+                height: 100vh;
+                background: url(resources/app-icon-192x192.png) #dcfff7 center center no-repeat !important;
+            }
+            body.loading * {
+                display: none;
+            }
+        </style>
 
         <!-- Chrome -->
         <meta name="theme-color" content="#a7ffeb" />
@@ -19,29 +28,7 @@
         <link rel="apple-touch-icon" href="resources/app-icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes">
     </head>
-    <body unresolved class="fullbleed">
-        <template is="dom-bind" id="app">
-            <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
-            <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
-            <paper-dialog id="about" modal>
-                <iron-icon class="big" src="resources/app-icon-192x192.png"></iron-icon>
-                <h1>Fitness Tracker</h1>
-                <p>
-                    This is a demo application built with <a href="https://elements.polymer-project.org/">Polymer Elements</a>,
-                    <a href="https://vaadin.com/components">Vaadin Components</a> and <a href="https://vaadin.com/charts">Vaadin Charts</a>.
-                </p>
-                <p>
-                    Fork the project on <a href="https://github.com/tehapo/fitness-tracker-demo">GitHub</a>.
-                </p>
-                <button dialog-confirm autofocus>OK</button>
-            </paper-dialog>
-
-            <neon-animated-pages id="pages" selected="[[selected]]" attr-for-selected="name">
-                <summary-view week-data="[[weekData]]" user="[[user]]" name="summary"></summary-view>
-                <workouts-view week-data="[[weekData]]" user="[[user]]" name="details"></workouts-view>
-            </neon-animated-pages>
-            <paper-toast id="toast"></paper-toast>
-        </template>
+    <body unresolved class="fullbleed loading">
 
         <script>
             // Configure Moment.js to start the week on Monday.
@@ -50,44 +37,37 @@
                      dow: 1
                  }
             });
+            var webComponentsSupported = ('registerElement' in document &&
+                'import' in document.createElement('link') &&
+                'content' in document.createElement('template'));
+            if (!webComponentsSupported) {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+                script.onload = finishLazyLoading;
+                document.head.appendChild(script);
+            } else {
+                finishLazyLoading();
+            }
 
-            var app = document.querySelector('#app');
-            app.selected = 'summary';
-            app.week = 40;
-            app.prevWeek = app.week;
+            function finishLazyLoading() {
+                var link = document.querySelector('#bundle');
+                if (link.import && link.import.readyState === 'complete') {
+                    onImportLoaded();
+                } else {
+                    link.addEventListener('load', onImportLoaded);
+                }
+            }
 
-            app.dataUrl = function(week) {
-                return 'data/week-' + week + '.json';
-            };
+            function onImportLoaded() {
+                var appTheme = document.createElement('style', 'custom-style');
+                appTheme.setAttribute('include', 'app-theme');
+                document.head.appendChild(appTheme);
 
-            app.ajaxError = function(err) {
-                this.$.toast.text = 'Sorry, no data available for week ' + app.week + '.';
-                this.$.toast.show();
-                app.week = app.prevWeek;
-            };
-
-            app.addEventListener('dom-change', function() {
-                this.$.pages.addEventListener('neon-animation-finish', function(e) {
-                    if (e.detail.toPage.pageTransitionFinished) {
-                        e.detail.toPage.pageTransitionFinished();
-                    }
-                });
-            });
-            document.addEventListener('navigate', function(e) {
-                app.selected = e.detail;
-            });
-            document.addEventListener('about', function(e) {
-                app.$.about.open();
-            });
-            document.addEventListener('next-week', function(e) {
-                app.prevWeek = app.week;
-                app.week++;
-            });
-            document.addEventListener('prev-week', function(e) {
-                app.prevWeek = app.week;
-                app.week--;
-            });
-
+                var appElement = document.createElement('fitness-tracker');
+                document.body.appendChild(appElement);
+                document.body.classList.remove('loading');
+            }
         </script>
     </body>
 </html>
