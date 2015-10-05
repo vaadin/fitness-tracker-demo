@@ -48,6 +48,16 @@ gulp.task('clean', function() {
     return del('dist');
 });
 
+gulp.task('del-unnecessary', function() {
+    // Delete files and directories no longer needed after polybuild.
+    return del([
+        'dist/index.build.html',
+        'dist/js',
+        'dist/bower_components',
+        'dist/progress-bubble-fork'
+    ]);
+});
+
 gulp.task('appcache', function() {
     return gulp.src(['dist/**/*'])
         .pipe(manifest({
@@ -59,6 +69,6 @@ gulp.task('appcache', function() {
 });
 
 gulp.task('dist', ['clean'], function(callback) {
-    runSequence('copy-files', 'polybuild', 'rename-files', 'appcache', callback);
+    runSequence('copy-files', 'polybuild', 'rename-files', 'del-unnecessary', 'appcache', callback);
 });
 gulp.task('default', ['serve']);
