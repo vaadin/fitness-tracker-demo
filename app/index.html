@@ -4,13 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Fitness Tracker</title>
-        <style>
-            body.loading {
-                width: 100vw;
-                height: 100vh;
-                background: url(resources/app-icon-192x192.png) #dcfff7 center center no-repeat !important;
-            }
-        </style>
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+        <script src="bower_components/moment/min/moment.min.js"></script>
+        <script src="js/formatters.js"></script>
+        <link rel="import" href="elements.html" />
+        <style is="custom-style" include="app-theme"></style>
 
         <!-- Chrome -->
         <meta name="theme-color" content="#a7ffeb" />
@@ -21,13 +19,7 @@
         <link rel="apple-touch-icon" href="resources/app-icon-192x192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes">
     </head>
-    <body unresolved class="fullbleed loading">
-        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-        <script src="bower_components/moment/min/moment.min.js"></script>
-        <script src="js/formatters.js"></script>
-        <link rel="import" href="elements.html" />
-        <style is="custom-style" include="app-theme"></style>
-
+    <body unresolved class="fullbleed">
         <template is="dom-bind" id="app">
             <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
             <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
@@ -96,9 +88,6 @@
                 app.week--;
             });
 
-            document.addEventListener('WebComponentsReady', function(e) {
-                document.body.classList.remove('loading');
-            });
         </script>
     </body>
 </html>
