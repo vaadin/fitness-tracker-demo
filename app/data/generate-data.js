@@ -112,7 +112,7 @@ for (var i = 0; i < sports.length; i++) {
     result.workouts.push(createWorkout(sports[i], monday));
 }
 // Add random workouts.
-var numberOfWorkouts = Math.round(Math.random() * 3);
+var numberOfWorkouts = Math.round(Math.random() * 10 + 10);
 for (var i = 0; i < numberOfWorkouts; i++) {
     result.workouts.push(createWorkout(randomItem(sports), monday));
 }
