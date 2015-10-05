@@ -20,6 +20,10 @@
             opacity: 0;
             transition: opacity 150ms;
         }
+        :host(.animation-off) svg,
+        :host(.animation-off) div {
+            transition: none;
+        }
         :host(.calculation-ready) svg,
         :host(.calculation-ready) div {
             opacity: 1;
@@ -60,7 +64,6 @@
         }
         #svgCircle {
             transition: stroke-dashoffset var(--progress-bubble-transition-duration, 150ms) ease-out;
-            /*stroke: var(--progress-bubble-stroke-color, rgba(0, 240, 45, 0.8));*/
         }
         :host(.animation-off) #svgCircle {
             transition: none;
