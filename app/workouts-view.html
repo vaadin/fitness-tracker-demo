@@ -55,6 +55,14 @@
             vaadin-grid /deep/ .avgPace,
             vaadin-grid ::content .maxPace,
             vaadin-grid /deep/ .maxPace,
+            vaadin-grid ::content .minAlt,
+            vaadin-grid /deep/ .minAlt,
+            vaadin-grid ::content .maxAlt,
+            vaadin-grid /deep/ .maxAlt,
+            vaadin-grid ::content .temperature,
+            vaadin-grid /deep/ .temperature,
+            vaadin-grid ::content .humidity,
+            vaadin-grid /deep/ .humidity,
             vaadin-grid ::content .calories,
             vaadin-grid /deep/ .calories {
                 @apply(--layout-end-justified);
@@ -179,6 +187,11 @@
                         <col name="calories" sortable />
                         <col name="avgPace" sortable />
                         <col name="maxPace" sortable />
+                        <col name="minAlt" sortable />
+                        <col name="maxAlt" sortable />
+                        <col name="temperature" sortable />
+                        <col name="humidity" sortable />
+                        <col name="weather" sortable />
                     </colgroup>
                     <thead>
                         <tr>
@@ -189,6 +202,11 @@
                             <th class="calories">CALORIES</th>
                             <th class="avgPace">AVG PACE</th>
                             <th class="maxPace">MAX PACE</th>
+                            <th class="minAlt">MIN ALT</th>
+                            <th class="maxAlt">MAX ALT</th>
+                            <th class="temperature">TEMPERATURE</th>
+                            <th class="humidity">HUMIDITY</th>
+                            <th class="weather">WEATHER</th>
                         </tr>
                     </thead>
                 </table>
@@ -295,20 +313,34 @@
                     calories: function(cell) {
                         cell.element.innerHTML = cell.data + ' kcal';
                     },
-                    pace: function(cell) {
+                    avgPace: function(cell) {
                         cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
+                    },
+                    maxPace: function(cell) {
+                        cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
+                    },
+                    minAlt: function(cell) {
+                        cell.element.innerHTML = cell.data + ' m';
+                    },
+                    maxAlt: function(cell) {
+                        cell.element.innerHTML = cell.data + ' m';
+                    },
+                    temperature: function(cell) {
+                        cell.element.innerHTML = template.formatTemperature(cell.data);
+                    },
+                    humidity: function(cell) {
+                        cell.element.innerHTML = cell.data + ' %';
                     },
                     sport: function(cell) {
                         cell.element.innerHTML = '<img class="sport-icon" src="resources/sport-icons/' + cell.data + '/' + cell.data + '-50.png" />';
                     }
-                }
-                grid.columns[0].renderer = renderers.sport;
-                grid.columns[1].renderer = renderers.date;
-                grid.columns[2].renderer = renderers.distance;
-                grid.columns[3].renderer = renderers.duration;
-                grid.columns[4].renderer = renderers.calories;
-                grid.columns[5].renderer = renderers.pace;
-                grid.columns[6].renderer = renderers.pace;
+                };
+                grid.columns.forEach(function(column) {
+                    console.log(column.name);
+                    if (renderers[column.name]) {
+                        column.renderer = renderers[column.name];
+                    }
+                });
 
                 grid.rowDetailsGenerator = function(rowIndex) {
                     var details = document.createElement('div');
