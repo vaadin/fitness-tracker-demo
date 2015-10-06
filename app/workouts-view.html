@@ -15,17 +15,17 @@
             vaadin-grid /deep/ thead.vaadin-grid-header {
                 box-shadow: none;
             }
-            vaadin-grid ::content tr td,
-            vaadin-grid /deep/ tr td {
-                border-bottom: none !important;
+            vaadin-grid ::content tr.vaadin-grid-row td.vaadin-grid-cell,
+            vaadin-grid /deep/ tr.vaadin-grid-row td.vaadin-grid-cell {
+                border-bottom: none;
             }
-            vaadin-grid ::content tr:hover td,
-            vaadin-grid /deep/ tr:hover td {
-                background: #d6eaea !important;
+            body:not(.touch-device) vaadin-grid ::content tr:hover td,
+            body:not(.touch-device) vaadin-grid /deep/ tr:hover td {
+                background: #d6eaea;
             }
             vaadin-grid ::content tr.vaadin-grid-spacer td,
             vaadin-grid /deep/ tr.vaadin-grid-spacer td {
-                background: #fff !important;
+                background: #fff;
             }
             vaadin-grid ::content tr.vaadin-grid-row td,
             vaadin-grid /deep/ tr.vaadin-grid-row td {
@@ -34,6 +34,16 @@
             vaadin-grid ::content tr.vaadin-grid-row-stripe td,
             vaadin-grid /deep/ tr.vaadin-grid-row-stripe td {
                 background: #fff;
+            }
+            vaadin-grid ::content tr.vaadin-grid-row-selected td,
+            vaadin-grid /deep/ tr.vaadin-grid-row-selected td {
+                background: #004d40 !important;
+                color: #fff;
+            }
+            vaadin-grid ::content tr.vaadin-grid-row-selected td img,
+            vaadin-grid /deep/ tr.vaadin-grid-row-selected td img {
+                -webkit-filter: invert();
+                filter: invert();
             }
             vaadin-grid ::content th,
             vaadin-grid /deep/ th {

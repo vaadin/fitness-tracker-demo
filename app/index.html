@@ -50,6 +50,10 @@
                 finishLazyLoading();
             }
 
+            if ('ontouchstart' in document.documentElement) {
+                document.body.classList.add('touch-device');
+            }
+
             function finishLazyLoading() {
                 var link = document.querySelector('#bundle');
                 if (link.import && link.import.readyState === 'complete') {
