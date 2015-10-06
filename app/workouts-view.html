@@ -307,10 +307,10 @@
                 template.formatDuration = Formatters.duration;
                 template.formatAscent = function(ascent) {
                     return (ascent > 0 ? '+' + ascent : ascent);
-                }
+                };
                 template.formatTemperature = function(temperature) {
                     return (temperature > 0 ? '+' + temperature : temperature) + ' C';
-                }
+                };
 
                 var grid = this.$.workoutGrid;
                 var self = this;
