@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var polyclean = require('polyclean');
 var vulcanize = require('gulp-vulcanize');
 var rename = require('gulp-rename');
 var merge = require('merge-stream');
@@ -45,6 +46,9 @@ gulp.task('vulcanize', function() {
             inlineCss: true,
             stripComments: true
         }))
+        .pipe(polyclean.cleanJsComments())
+        .pipe(polyclean.cleanCss())
+        .pipe(polyclean.uglifyJs())
         .pipe(gulp.dest('./dist/'));
 });
 
