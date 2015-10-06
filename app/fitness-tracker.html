@@ -27,6 +27,12 @@
                 outline: none !important;
                 background: transparent;
             }
+            paper-toast {
+                left: 12px;
+                right: 12px;
+                font-size: 14px;
+                z-index: 10;
+            }
         </style>
 
         <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
