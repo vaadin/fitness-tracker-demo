@@ -1,7 +1,7 @@
 <dom-module id="fitness-tracker">
     <template>
         <style>
-            #about iron-icon {
+            #about img {
                 float: left;
                 padding-right: 8px;
             }
@@ -38,7 +38,7 @@
         <iron-ajax auto url="[[dataUrl(week)]]" handle-as="json" last-response="{{weekData}}" on-error="ajaxError" /></iron-ajax>
         <iron-ajax auto url="data/user.json" handle-as="json" last-response="{{user}}"></iron-ajax>
         <paper-dialog id="about" modal>
-            <iron-icon class="big" src="resources/app-icon-192x192.png"></iron-icon>
+            <img src="resources/app-icon-192x192.png" width="32" height="32" />
             <h1>Fitness Tracker</h1>
             <p>
                 This is a demo application built with <a href="https://elements.polymer-project.org/">Polymer Elements</a>,
