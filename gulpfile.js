@@ -33,12 +33,6 @@ gulp.task('copy-files', function() {
     return merge(app, bower);
 });
 
-gulp.task('polybuild', function() {
-    return gulp.src('dist/index.html')
-        .pipe(polybuild({ maximumCrush: true }))
-        .pipe(gulp.dest('./dist/'));
-});
-
 gulp.task('vulcanize', function() {
     return gulp.src('dist/elements.html')
         .pipe(vulcanize({
