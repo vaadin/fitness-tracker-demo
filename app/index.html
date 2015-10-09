@@ -9,13 +9,36 @@
         <script src="js/formatters.js"></script>
         <link rel="import" id="bundle" href="elements.html" async />
         <style>
-            body.loading {
+            #loadingScreen {
+                display: block;
                 width: 100vw;
                 height: 100vh;
-                background: url(resources/app-icon-192x192.png) #dcfff7 center center no-repeat !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 1 !important;
+                background: url(resources/app-icon-192x192.png) #dcfff7 center center no-repeat;
+                background-size: 96px 96px;
+                transition: opacity 400ms;
+                -webkit-animation: heartbeat 1000ms infinite;
+                animation: heartbeat 1000ms infinite;
             }
-            body.loading * {
-                display: none;
+            .ready #loadingScreen {
+                opacity: 0 !important;
+            }
+            @-webkit-keyframes heartbeat {
+                0%  { -webkit-transform: scale(1); transform: scale(1); }
+                20% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+                40% { -webkit-transform: scale(1); transform: scale(1); }
+                60% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+                80% { -webkit-transform: scale(1); transform: scale(1); }
+            }
+            @keyframes heartbeat {
+                0%  { -webkit-transform: scale(1); transform: scale(1); }
+                20% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+                40% { -webkit-transform: scale(1); transform: scale(1); }
+                60% { -webkit-transform: scale(1.1); transform: scale(1.1); }
+                80% { -webkit-transform: scale(1); transform: scale(1); }
             }
         </style>
 
@@ -29,8 +52,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     </head>
-    <body unresolved class="fullbleed loading">
-
+    <body class="fullbleed loading">
+        <div id="loadingScreen"></div>
         <script>
             // Configure Moment.js to start the week on Monday.
             moment.locale('en', {
@@ -65,9 +88,10 @@
                 appTheme.setAttribute('include', 'app-theme');
                 document.head.appendChild(appTheme);
 
+                document.body.classList.remove('loading');
+                document.body.classList.add('ready');
                 var appElement = document.createElement('fitness-tracker');
                 document.body.appendChild(appElement);
-                document.body.classList.remove('loading');
             }
         </script>
     </body>
