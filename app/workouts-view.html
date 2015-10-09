@@ -153,14 +153,16 @@
                 border-radius: 4px;
                 display: inline-block;
                 cursor: pointer;
-                background: url("resources/vaadin-icons/chevron-left-edit.svg") 16px center no-repeat;
                 background-color: var(--secondary-color);
-                background-size: 16px;
-                padding-left: 40px;
                 -webkit-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+            }
+            app-toolbar #back-button iron-icon {
+                fill: #00bfa5;
+                --iron-icon-height: 16px;
+                --iron-icon-width: 16px;
             }
 
             .h1 span {
@@ -189,7 +191,10 @@
         <div class="layout vertical" style="min-height: 100vh">
             <app-toolbar user="[[user]]">
                 <div class="h1">All Workouts <span class="circle">[[weekData.weekNumber]]</div>
-                <div class="h2" id="back-button" on-tap="_navigateBack">Back to summary</div>
+                <div class="h2" id="back-button" on-tap="_navigateBack">
+                    <iron-icon icon="vaadin-icons:chevron-left"></iron-icon>
+                    Back to summary
+                </div>
             </app-toolbar>
             <vaadin-grid class="flex" frozen-columns="2" selection-mode="single" id="workoutGrid">
                 <table>

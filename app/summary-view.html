@@ -27,15 +27,17 @@
             }
             #prev {
                 float: left;
-                background: url("resources/vaadin-icons/chevron-left-edit.svg") center left no-repeat;
-                background-size: 18px;
-                padding: 5px 5px 5px 20px;
+                padding: 5px;
+            }
+            #next iron-icon,
+            #prev iron-icon {
+                fill: #00bfa5;
+                --iron-icon-height: 18px;
+                --iron-icon-width: 18px;
             }
             #next {
                 float: right;
-                background: url("resources/vaadin-icons/chevron-right-edit.svg") center right no-repeat;
-                background-size: 18px;
-                padding: 5px 20px 5px 5px;
+                padding: 5px;
             }
             #controls::after {
                 content: "";
@@ -76,8 +78,14 @@
             </span>
         </app-toolbar>
         <div id="controls">
-            <div id="prev" on-tap="_prevWeek">Previous week</div>
-            <div id="next" on-tap="_nextWeek">Next week</div>
+            <div id="prev" on-tap="_prevWeek">
+                <iron-icon icon="vaadin-icons:chevron-left"></iron-icon>
+                Previous week
+            </div>
+            <div id="next" on-tap="_nextWeek">
+                Next week
+                <iron-icon icon="vaadin-icons:chevron-right"></iron-icon>
+            </div>
         </div>
         <summary-rings id="summary" summary-rows="[[_goalSummary(weekData)]]" on-tap="_showDetails"></summary-rings>
 
