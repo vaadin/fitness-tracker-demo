@@ -304,7 +304,7 @@
                 // Workaround for vaadin-grid issue #172
                 // https://github.com/vaadin/vaadin-grid/issues/172
                 var grid = this.$.workoutGrid;
-                grid.data.source = grid.data.source;
+                grid.datasource = grid.datasource;
             },
 
             ready: function() {
@@ -363,7 +363,7 @@
                 grid.rowDetailsGenerator = function(rowIndex) {
                     var details = document.createElement('div');
                     details.classList.add('workout-details');
-                    grid.data.getItem(rowIndex, function(err, item) {
+                    grid.getItem(rowIndex, function(err, item) {
                         if (!err) {
                             var detailsTemplate = self.$.workoutDetails;
                             detailsTemplate._getWeatherIcon = function(weather) {
@@ -405,7 +405,7 @@
 
             _weekDataChanged: function() {
                 visibleRowDetails = [];
-                this.$.workoutGrid.data.source = this.weekData.workouts;
+                this.$.workoutGrid.items = this.weekData.workouts;
             }
         });
     </script>
