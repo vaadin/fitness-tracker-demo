@@ -301,8 +301,8 @@
             pageTransitionFinished: function() {
                 // Workaround for vaadin-grid issue #172
                 // https://github.com/vaadin/vaadin-grid/issues/172
-                var grid = this.$.workoutGrid;
-                grid.datasource = grid.datasource;
+                this.$.workoutGrid.items = [];
+                this.$.workoutGrid.items = this.weekData.workouts;
             },
 
             ready: function() {
