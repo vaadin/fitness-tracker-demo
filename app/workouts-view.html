@@ -235,9 +235,7 @@
             <template is="dom-bind" id="workoutDetails">
                 <div class="workout-details">
                     <div class="map-and-weather">
-                        <div class="map">
-                            <google-map id="routeMap" disable-default-ui latitude="60.42610282861618" longitude="22.152894500000002" apiKey="AIzaSyDYl_axhBi_zJ21hV3xxqQ5bwQXChFe8hs"></google-map>
-                        </div>
+                        <div class="map"></div>
                         <div class="weather">
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/temperature.png"></iron-icon><strong>Temp</strong>[[formatTemperature(workout.temperature)]]</div>
                             <div class="cell"><iron-icon class="big" src="resources/weather-icons/Wet.png"></iron-icon><strong>Humidity</strong><span>[[workout.humidity]]</span>%</div>
@@ -379,6 +377,7 @@
                             detailsTemplate.workout = item;
                             details.innerHTML = self.$.templateWrapper.querySelector('.workout-details').innerHTML;
 
+                            details.querySelector('.map').innerHTML = '<google-map id="routeMap" disable-default-ui latitude="60.42610282861618" longitude="22.152894500000002" apiKey="AIzaSyDYl_axhBi_zJ21hV3xxqQ5bwQXChFe8hs"></google-map>';
                             details.addEventListener('google-map-ready', function() {
                                 // Sample data – Teemu's Ruisrääkki from 2014.
                                 this.querySelector('#routeMap').kml = 'https://demo.vaadin.com/fitness-tracker/resources/activity_594778529.kml';
