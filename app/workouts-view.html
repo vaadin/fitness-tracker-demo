@@ -197,10 +197,12 @@
 
             @media (max-width: 340px) {
                 vaadin-grid ::content .workout-details,
-                vaadin-grid /deep/ .workout-details,
+                vaadin-grid /deep/ .workout-details {
+                    padding: 0 !important;
+                }
                 vaadin-grid ::content .vaadin-grid-spacer td,
                 vaadin-grid /deep/ .vaadin-grid-spacer td {
-                    padding: 0 !important;
+                    padding: 0 0 12px 0 !important;
                 }
             }
         </style>
