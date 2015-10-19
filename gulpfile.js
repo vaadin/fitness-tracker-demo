@@ -68,6 +68,7 @@ gulp.task('del-unnecessary', function() {
         '!dist/bower_components',
         '!dist/bower_components/moment/**',
         '!dist/bower_components/webcomponentsjs/**',
+        '!dist/bower_components/vaadin-grid/**',
         'dist/progress-bubble-fork'
     ]);
 });
