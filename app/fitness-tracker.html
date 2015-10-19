@@ -70,9 +70,13 @@
                     type: Number,
                     value: 40
                 },
-                prevWeek: {
+                minWeek: {
                     type: Number,
-                    value: 40
+                    value: 38
+                },
+                maxWeek: {
+                    type: Number,
+                    value: 41
                 }
             },
 
@@ -81,9 +85,12 @@
             },
 
             ajaxError: function(err) {
-                this.$.toast.text = 'Sorry, no data available for week ' + this.week + '.';
+                this.showToast('Sorry, couldn\'t load data. Please try again later.');
+            },
+
+            showToast: function(text) {
+                this.$.toast.text = text;
                 this.$.toast.show();
-                this.week = this.prevWeek;
             },
 
             ready: function() {
@@ -99,12 +106,18 @@
                     this.$.about.open();
                 });
                 this.addEventListener('next-week', function(e) {
-                    this.prevWeek = this.week;
-                    this.week++;
+                    if (this.week < this.maxWeek) {
+                        this.week++;
+                    } else {
+                        this.showToast('Sorry, no data available for week ' + (this.week + 1) + '.');
+                    }
                 });
                 this.addEventListener('prev-week', function(e) {
-                    this.prevWeek = this.week;
-                    this.week--;
+                    if (this.week > this.minWeek) {
+                        this.week--;
+                    } else {
+                        this.showToast('Sorry, no data available for week ' + (this.week - 1) + '.');
+                    }
                 });
             }
         });
