@@ -194,6 +194,15 @@
                 @apply(--layout-inline);
                 @apply(--layout-center-center);
             }
+
+            @media (max-width: 340px) {
+                vaadin-grid ::content .workout-details,
+                vaadin-grid /deep/ .workout-details,
+                vaadin-grid ::content .vaadin-grid-spacer td,
+                vaadin-grid /deep/ .vaadin-grid-spacer td {
+                    padding: 0 !important;
+                }
+            }
         </style>
 
         <div class="layout vertical" style="min-height: 100vh">
