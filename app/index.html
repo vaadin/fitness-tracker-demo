@@ -89,6 +89,12 @@
             }
 
             function onImportLoaded() {
+                var loadingScreen = document.querySelector('#loadingScreen');
+                loadingScreen.addEventListener('transitionend', function() {
+                    // Remove the loading screen from DOM after CSS transition.
+                    document.body.removeChild(loadingScreen);
+                });
+
                 var appTheme = document.createElement('style', 'custom-style');
                 appTheme.setAttribute('include', 'app-theme');
                 document.head.appendChild(appTheme);
