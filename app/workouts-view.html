@@ -14,6 +14,13 @@
             vaadin-grid ::content thead.vaadin-grid-header,
             vaadin-grid /deep/ thead.vaadin-grid-header {
                 box-shadow: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
+            vaadin-grid ::content thead.vaadin-grid-header .gwt-HTML,
+            vaadin-grid /deep/ thead.vaadin-grid-header .gwt-HTML {
+                pointer-events: none;
             }
             vaadin-grid ::content tr.vaadin-grid-row td.vaadin-grid-cell,
             vaadin-grid /deep/ tr.vaadin-grid-row td.vaadin-grid-cell {
