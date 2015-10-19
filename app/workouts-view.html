@@ -407,6 +407,26 @@
                         grid.setRowDetailsVisible(detailsOpenIndex, true);
                     }
                 });
+                grid.addEventListener('sort-order-changed', function() {
+                    var sortOrder = grid.sortOrder[0];
+                    var sortProperty = grid.columns[sortOrder.column].name;
+                    var sortDirection = sortOrder.direction;
+                    self.weekData.workouts.sort(function(a, b) {
+                        var res;
+                        if (!isNaN(a[sortProperty])) {
+                            res = parseInt(a[sortProperty], 10) - parseInt(b[sortProperty], 10);
+                        } else {
+                            // Let's pretend everything that's not a number is a string.
+                            res = a[sortProperty].localeCompare(b[sortProperty]);
+                        }
+
+                        if ('desc' === sortDirection) {
+                            res *= -1;
+                        }
+                        return res;
+                    });
+                });
+
             },
 
             _weekDataChanged: function() {
