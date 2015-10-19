@@ -338,10 +338,10 @@
                         cell.element.innerHTML = cell.data + ' kcal';
                     },
                     avgPace: function(cell) {
-                        cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
+                        cell.element.innerHTML = Formatters.duration(cell.data, true) + ' min/km';
                     },
                     maxPace: function(cell) {
-                        cell.element.innerHTML = Formatters.duration(cell.data) + ' min/km';
+                        cell.element.innerHTML = Formatters.duration(cell.data, true) + ' min/km';
                     },
                     minAlt: function(cell) {
                         cell.element.innerHTML = cell.data + ' m';
