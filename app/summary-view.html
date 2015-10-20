@@ -87,11 +87,11 @@
                 <iron-icon icon="vaadin-icons:chevron-right"></iron-icon>
             </div>
         </div>
-        <summary-rings id="summary" summary-rows="[[_goalSummary(weekData)]]" on-tap="_showDetails"></summary-rings>
+        <summary-rings id="summary" summary-rows="[[_goalSummary(weekData, user)]]" on-tap="_showDetails"></summary-rings>
 
         <div id="summary-tables" on-tap="_showDetails">
             <template is="dom-repeat" items="[[_workoutsBySport(weekData)]]">
-                <summary-table workouts="[[item]]" goals="[[_goalSummary(weekData)]]"></summary-table>
+                <summary-table workouts="[[item]]" goals="[[_goalSummary(weekData, user)]]"></summary-table>
             </template>
         </div>
     </template>
@@ -120,9 +120,9 @@
                     }
                 }
             },
-            _goalSummary: function(weekData) {
+            _goalSummary: function(weekData, user) {
                 var totals = this._totalsBySport(weekData);
-                return this.user.goals.map(function(goal) {
+                return user.goals.map(function(goal) {
                     var achieved = 0;
                     var total = 0;
                     if (totals[goal.sport]) {
