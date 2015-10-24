@@ -1,56 +1,56 @@
 <dom-module id="speed-altitude-chart">
     <template>
-        <v-chart id="vchart" type="areaspline">
-            <vc-chart background-color="transparent"></vc-chart>
-            <vc-title>
-                <vc-style display="none"></vc-style>
-            </vc-title>
+        <vaadin-areaspline-chart id="vchart" type="areaspline">
+            <chart background-color="transparent"></chart>
+            <title>
+                <style display="none"></style>
+            </title>
 
-            <vc-navigation>
-                <vc-button-options enabled="false"></vc-button-options>
-            </vc-navigation>
+            <navigation>
+                <button-options enabled="false"></button-options>
+            </navigation>
 
-            <vc-legend layout="horizontal">
-                <vc-item-style color="#004d40"></vc-item-style>
-            </vc-legend>
+            <legend layout="horizontal">
+                <item-style color="#004d40"></item-style>
+            </legend>
 
-            <vc-x-axis>
-                <vc-labels>
-                    <vc-style color="#004d40"></vc-style>
-                </vc-labels>
-            </vc-x-axis>
-            <vc-y-axis id="speed">
-                <vc-title>
-                    <vc-text>km/h</vc-text>
-                    <vc-style color="#004d40"></vc-style>
-                </vc-title>
-                <vc-labels>
-                    <vc-style color="#004d40"></vc-style>
-                </vc-labels>
-            </vc-y-axis>
-            <vc-y-axis opposite="true" id="alt">
-                <vc-title>
-                    <vc-text>meters</vc-text>
-                    <vc-style color="#004d40"></vc-style>
-                </vc-title>
-                <vc-labels>
-                    <vc-style color="#004d40"></vc-style>
-                </vc-labels>
-            </vc-y-axis>
+            <x-axis>
+                <labels>
+                    <style color="#004d40"></style>
+                </labels>
+            </x-axis>
+            <y-axis id="speed">
+                <title>
+                    <text>km/h</text>
+                    <style color="#004d40"></style>
+                </title>
+                <labels>
+                    <style color="#004d40"></style>
+                </labels>
+            </y-axis>
+            <y-axis opposite="true" id="alt">
+                <title>
+                    <text>meters</text>
+                    <style color="#004d40"></style>
+                </title>
+                <labels>
+                    <style color="#004d40"></style>
+                </labels>
+            </y-axis>
 
-            <vc-plot-options>
-                <vc-areaspline fill-opacity="0.4"></vc-areaspline>
-            </vc-plot-options>
+            <plot-options>
+                <areaspline fill-opacity="0.4"></areaspline>
+            </plot-options>
 
-            <vc-tooltip shared="true"></vc-tooltip>
+            <tooltip shared="true"></tooltip>
 
             <data-series name="Speed" color="#00bfa5" y-axis="speed" data="[[speedData]]">
-                <vc-tooltip value-suffix=" km/h"></vc-tooltip>
+                <tooltip value-suffix=" km/h"></tooltip>
             </data-series>
             <data-series name="Altitude" color="#00806a" y-axis="alt" data="[[altitudeData]]">
-                <vc-tooltip value-suffix=" m"></vc-tooltip>
+                <tooltip value-suffix=" m"></tooltip>
             </data-series>
-        </v-chart>
+        </vaadin-areaspline-chart>
     </template>
     <script>
         Polymer({
