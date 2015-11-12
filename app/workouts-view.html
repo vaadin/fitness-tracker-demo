@@ -318,9 +318,6 @@
             },
 
             pageTransitionFinished: function() {
-                // Workaround for vaadin-grid issue #172
-                // https://github.com/vaadin/vaadin-grid/issues/172
-                this.$.workoutGrid.items = [];
                 this.$.workoutGrid.items = this.weekData.workouts;
             },
 
@@ -411,7 +408,7 @@
                 };
 
                 var detailsOpenIndex = -1;
-                grid.addEventListener('select', function() {
+                grid.addEventListener('selected-items-changed', function() {
                     grid.setRowDetailsVisible(detailsOpenIndex, false);
                     var selected = grid.selection.selected();
                     if (selected.length === 1) {
